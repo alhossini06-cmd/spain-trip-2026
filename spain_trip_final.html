@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#109E75">
+<meta name="description" content="منظم شامل وذكي لرحلة إسبانيا 2026">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="رحلة إسبانيا">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23109E75' width='192' height='192'/><text x='50%' y='50%' font-size='80' font-weight='bold' text-anchor='middle' dominant-baseline='middle' fill='white' font-family='Arial'>🌍</text></svg>">
 <title>رحلة إسبانيا – تنظيم شامل</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1435,6 +1442,17 @@ window.addEventListener('load', () => {
     switchTab('overview');
   }
 });
+
+// ====== PWA - SERVICE WORKER ======
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').then(reg => {
+      console.log('✅ Service Worker تم تسجيله:', reg);
+    }).catch(err => {
+      console.log('❌ خطأ في Service Worker:', err);
+    });
+  });
+}
 </script>
 
 </body>
