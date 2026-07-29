@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رحلة إسبانيا – تنظيم شامل</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --primary: #1D9E75;
+    --secondary: #534AB7;
+    --danger: #FF6B6B;
+    --success: #1D9E75;
+    --bg: #f5f4f0;
+    --card-bg: #fff;
+    --text: #1a1a18;
+    --text-light: #6b6b66;
+    --border: #dddbd3;
+  }
+  
+  body.dark-mode {
+    --bg: #1a1a18;
+    --card-bg: #2a2a28;
+    --text: #f5f4f0;
+    --text-light: #aaa;
+    --border: #333;
+  }
+  
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+  }
+  
+  .container { max-width: 720px; margin: 0 auto; padding: 1.5rem 1rem 5rem; }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .title { font-size: 28px; font-weight: 700; text-align: center; flex: 1; }
+  .subtitle { font-size: 12px; color: var(--text-light); text-align: center; margin-bottom: 1rem; }
+  
+  .theme-btn { 
+    background: var(--card-bg); 
+    border: 1px solid var(--border);
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+  }
+  
+  .theme-btn:hover { transform: scale(1.1); }
+  
+  #countdown {
+    background: linear-gradient(135deg, #FF6B6B, #FFE66D);
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #8B1538;
+    margin-bottom: 1.5rem;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  
+  .tab-btn {
+    flex: 1;
+    min-width: 90px;
+    padding: 10px 8px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text-light);
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.3s;
+    white-space: nowrap;
+  }
+  
+  .tab-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  
+  .section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+  }
+  
+  .section-header {
+    background: linear-gradient(135deg, var(--primary), #0F6E56);
+    color: white;
+    padding: 14px 16px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  
+  .section-body { padding: 16px; }
+  
+  .form-group {
+    margin-bottom: 12px;
+  }
+  
+  .form-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+  }
+  
+  .form-input, .form-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+    background: var(--card-bg);
+    color: var(--text);
+    resize: vertical;
+  }
+  
+  .form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(29, 158, 117, 0.1);
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .booking-card {
+    background: #F0F8F5;
+    border-left: 4px solid var(--primary);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 12px;
+  }
+  
+  .booking-title {
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  
+  .booking-info {
+    color: var(--text);
+    line-height: 1.6;
+  }
+  
+  .cost-box {
+    background: linear-gradient(135deg, #1D9E75, #0F6E56);
+    color: white;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .cost-label { font-size: 12px; opacity: 0.9; }
+  .cost-value { font-size: 28px; font-weight: 700; margin-top: 6px; }
+  
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  
+  .checklist-item:last-child { border-bottom: none; }
+  
+  .checklist-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  .checklist-label {
+    flex: 1;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  
+  .checklist-item input[type="checkbox"]:checked + .checklist-label {
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
+  
+  .notes-box {
+    background: #FFF8EE;
+    border-left: 4px solid #BA7517;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #6b5230;
+  }
+  
+  .settlement-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .settlement-name {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  
+  .settlement-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+  
+  .settlement-balance {
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  
+  .settlement-positive { color: var(--success); }
+  .settlement-negative { color: var(--danger); }
+  
+  .transfer-box {
+    background: #C6EFCE;
+    border-left: 4px solid var(--success);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .copy-btn {
+    background: white;
+    border: 1px solid var(--success);
+    color: var(--success);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .copy-btn:hover {
+    background: var(--success);
+    color: white;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.3s;
+    margin-bottom: 10px;
+  }
+  
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+  }
+  
+  .btn-primary:hover { background: #0F6E56; }
+  
+  .btn-secondary {
+    background: var(--secondary);
+    color: white;
+  }
+  
+  .btn-secondary:hover { background: #3C3489; }
+  
+  .btn-small {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  
+  .add-expense-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .add-expense-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: inherit;
+    background: var(--card-bg);
+    color: var(--text);
+  }
+  
+  .add-expense-form .btn-primary {
+    flex: 0 0 auto;
+    width: auto;
+    margin-bottom: 0;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+  
+  .expense-item {
+    background: #f9f9f9;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .expense-info { flex: 1; }
+  .expense-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .expense-per { font-size: 11px; color: var(--text-light); margin-top: 3px; }
+  .expense-amount { font-size: 13px; font-weight: 700; color: var(--primary); }
+  
+  .delete-btn {
+    background: var(--danger);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  
+  .location-item {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-left: 4px solid var(--primary);
+  }
+  
+  .location-name {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  
+  .location-info {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 1rem;
+  }
+  
+  .action-buttons .btn {
+    margin-bottom: 0;
+    flex: 1;
+  }
+  
+  @media (max-width: 600px) {
+    .container { padding: 1rem 0.8rem 5rem; }
+    .title { font-size: 22px; }
+    .tab-btn { min-width: 70px; font-size: 10px; padding: 8px 6px; }
+    .form-row { grid-template-columns: 1fr; }
+    .cost-value { font-size: 24px; }
+    .transfer-box { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .copy-btn { margin-top: 8px; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title">🌍 رحلة إسبانيا</h1>
+    <button class="theme-btn" onclick="toggleTheme()" title="تبديل الوضع">🌙</button>
+  </div>
+  
+  <p class="subtitle">مايوركا · ايبيزا | 4-13 أغسطس 2026</p>
+  <div id="countdown"></div>
+  
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('overview')">📋 نظرة عامة</button>
+    <button class="tab-btn" onclick="switchTab('bookings')">🏨 الحجوزات</button>
+    <button class="tab-btn" onclick="switchTab('costs')">💰 المصاريف</button>
+    <button class="tab-btn" onclick="switchTab('itinerary')">📅 الجدول اليومي</button>
+    <button class="tab-btn" onclick="switchTab('alerts')">🔔 تنبيهات</button>
+    <button class="tab-btn" onclick="switchTab('notes')">📝 ملاحظات</button>
+  </div>
+
+  <!-- ====== TAB 1: OVERVIEW ====== -->
+  <div id="overview" class="tab-panel active">
+    <div class="section">
+      <div class="section-header">🗺️ الأماكن المهمة</div>
+      <div class="section-body">
+        <div class="location-item">
+          <div class="location-name">✈️ مطار الرياض</div>
+          <div class="location-info">الإقلاع: الثلاثاء 4 أغسطس · 5:00 صباحاً</div>
+        </div>
+        
+        <div class="location-item">
+          <div class="location-name">🏨 Aubamar Palma Resort & Spa</div>
+          <div class="location-info">مايوركا | Check-in: 6:30 م | 5 ليالٍ</div>
+        </div>
+        
+        <div class="location-item">
+          <div class="location-name">🚗 استئجار السيارات</div>
+          <div class="location-info">مطار مايوركا | 6:00 عصراً</div>
+        </div>
+        
+        <div class="location-item">
+          <div class="location-name">✈️ مطار مايوركا</div>
+          <div class="location-info">الطيران لايبيزا: الأحد 9 أغسطس · 3:20 عصراً</div>
+        </div>
+        
+        <div class="location-item">
+          <div class="location-name">🎉 Ushuaïa Ibiza Beach Hotel</div>
+          <div class="location-info">ايبيزا | Check-in: 4:45 م | 4 ليالٍ | Club Access متضمن</div>
+        </div>
+        
+        <div class="location-item">
+          <div class="location-name">✈️ الرحيل</div>
+          <div class="location-info">الخميس 13 أغسطس | معاذ فقط لـ الرياض</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">💰 الملخص المالي السريع</div>
+      <div class="section-body">
+        <div class="cost-box">
+          <div class="cost-label">المبلغ الذي يدفعه كل شخص</div>
+          <div class="cost-value" id="quick-total">12,510.97 ر.س</div>
+        </div>
+        <div style="font-size: 12px; color: var(--text-light); text-align: center; line-height: 1.8;">
+          <div>✈️ الطيران: 2,351 ريال</div>
+          <div>🏨 الفنادق: 9,295.37 ريال</div>
+          <div>🚗 السيارة: 864.60 ريال</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">📅 الأحداث المهمة</div>
+      <div class="section-body">
+        <div style="font-size: 12px; line-height: 1.8; color: var(--text);">
+          <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+            <strong>4 أغسطس (الثلاثاء)</strong><br>
+            5:00 ص - إقلاع من الرياض<br>
+            5:10 م - وصول مايوركا<br>
+            6:30 م - Check-in الفندق
+          </div>
+          
+          <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+            <strong>5-8 أغسطس</strong><br>
+            Nikki Beach · جولة قارب · Sa Calobra<br>
+            استمتاع في مايوركا 🏝️
+          </div>
+          
+          <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+            <strong>9 أغسطس (الأحد)</strong><br>
+            3:20 م - طيران مايوركا → ايبيزا<br>
+            4:45 م - Check-in Ushuaïa
+          </div>
+          
+          <div>
+            <strong>10-12 أغسطس</strong><br>
+            حفلات في Ushuaïa 🎉<br>
+            Formentera (اختياري)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== TAB 2: BOOKINGS ====== -->
+  <div id="bookings" class="tab-panel">
+    <div class="section">
+      <div class="section-header">✈️ الطيران - الرياض → مايوركا</div>
+      <div class="section-body">
+        <div class="form-group">
+          <label class="form-label">الاسم المحجوز عليه</label>
+          <input type="text" class="form-input" id="flight1-name" placeholder="الاسم الكامل">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رقم التأكيد</label>
+          <input type="text" class="form-input" id="flight1-ref" placeholder="QR12345">
+        </div>
+        <div class="form-group">
+          <label class="form-label">السعر (ريال)</label>
+          <input type="number" class="form-input" id="flight1-price" placeholder="1685" value="1685">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رابط الحجز</label>
+          <input type="text" class="form-input" id="flight1-link" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ملاحظات</label>
+          <textarea class="form-textarea" id="flight1-notes" placeholder="وقت الاقلاع، معلومات إضافية"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">🏨 الفندق - مايوركا (Aubamar)</div>
+      <div class="section-body">
+        <div class="form-group">
+          <label class="form-label">الاسم المحجوز عليه</label>
+          <input type="text" class="form-input" id="hotel1-name" placeholder="الاسم الكامل">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رقم التأكيد</label>
+          <input type="text" class="form-input" id="hotel1-ref" placeholder="AUBAMAR123">
+        </div>
+        <div class="form-group">
+          <label class="form-label">السعر الكلي (ريال)</label>
+          <input type="number" class="form-input" id="hotel1-price" placeholder="15910" value="15910">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رقم الفندق</label>
+          <input type="text" class="form-input" id="hotel1-phone" placeholder="+34 971 123 456">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رابط الحجز</label>
+          <input type="text" class="form-input" id="hotel1-link" placeholder="https://booking.com/...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ملاحظات</label>
+          <textarea class="form-textarea" id="hotel1-notes" placeholder="نوع الغرف، خدمات خاصة"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">🚗 السيارة المؤجرة - مايوركا</div>
+      <div class="section-body">
+        <div class="form-group">
+          <label class="form-label">الاسم المحجوز عليه</label>
+          <input type="text" class="form-input" id="car1-name" placeholder="الاسم الكامل">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رقم التأكيد</label>
+          <input type="text" class="form-input" id="car1-ref" placeholder="HERTZ456">
+        </div>
+        <div class="form-group">
+          <label class="form-label">السعر الكلي (ريال)</label>
+          <input type="number" class="form-input" id="car1-price" placeholder="4190" value="4190">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رقم التواصل</label>
+          <input type="text" class="form-input" id="car1-phone" placeholder="+34 971 456 789">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رابط الحجز</label>
+          <input type="text" class="form-input" id="car1-link" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ملاحظات</label>
+          <textarea class="form-textarea" id="car1-notes" placeholder="نوع السيارة، رقم اللوحة، شروط التأمين"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">✈️ الطيران - مايوركا → ايبيزا</div>
+      <div class="section-body">
+        <div class="form-group">
+          <label class="form-label">رقم التأكيد</label>
+          <input type="text" class="form-input" id="flight2-ref" placeholder="IB789">
+        </div>
+        <div class="form-group">
+          <label class="form-label">السعر الإجمالي (ريال)</label>
+          <input type="number" class="form-input" id="flight2-price" placeholder="3330" value="3330">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رابط الحجز</label>
+          <input type="text" class="form-input" id="flight2-link" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ملاحظات</label>
+          <textarea class="form-textarea" id="flight2-notes" placeholder="وقت الاقلاع 3:20 عصراً"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">🎉 الفندق - ايبيزا (Ushuaïa)</div>
+      <div class="section-body">
+        <div class="booking-card">
+          <div class="booking-title">✅ تم تأكيد البيانات:</div>
+          <div class="booking-info">
+            <strong>Ushuaïa Ibiza Beach Hotel - Adults Only</strong><br>
+            Club Entrance Included ✓<br>
+            Club Superior Room - 2 Single Beds + Sofa Bed<br>
+            9-13 أغسطس (4 ليالٍ)
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">الاسم المحجوز عليه</label>
+          <input type="text" class="form-input" id="hotel2-name" placeholder="الاسم الكامل">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رقم التأكيد</label>
+          <input type="text" class="form-input" id="hotel2-ref" placeholder="USHUAIA789">
+        </div>
+        <div class="form-group">
+          <label class="form-label">السعر الكلي (ريال)</label>
+          <input type="number" class="form-input" id="hotel2-price" placeholder="30571.87" value="30571.87">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رقم الفندق</label>
+          <input type="text" class="form-input" id="hotel2-phone" placeholder="+34 971 789 012">
+        </div>
+        <div class="form-group">
+          <label class="form-label">رابط الحجز</label>
+          <input type="text" class="form-input" id="hotel2-link" placeholder="https://ushuaia.com/...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ملاحظات</label>
+          <textarea class="form-textarea" id="hotel2-notes" placeholder="Check-in time، خدمات VIP، ملاحظات خاصة"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-primary" onclick="saveBookings()">💾 حفظ الحجوزات</button>
+      <button class="btn btn-secondary" onclick="clearBookings()">🗑️ مسح الكل</button>
+    </div>
+  </div>
+
+  <!-- ====== TAB 3: COSTS ====== -->
+  <div id="costs" class="tab-panel">
+    <div class="section">
+      <div class="section-header">💰 تفصيل المصاريف</div>
+      <div class="section-body" style="font-size: 12px; line-height: 1.8; color: var(--text);">
+        <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+          <strong>🏨 السكن:</strong><br>
+          مايوركا: 3,181 ريال<br>
+          ايبيزا: 6,114.37 ريال
+        </div>
+        <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+          <strong>✈️ الطيران:</strong><br>
+          الرياض → مايوركا: 1,685 ريال<br>
+          مايوركا → ايبيزا: 666 ريال
+        </div>
+        <div>
+          <strong>🚗 النقل:</strong><br>
+          السيارة المؤجرة: 864.60 ريال
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">➕ مصاريف إضافية</div>
+      <div class="section-body">
+        <div class="add-expense-form">
+          <input type="text" id="expense-name" placeholder="اسم المصروف">
+          <input type="number" id="expense-amount" placeholder="المبلغ" style="width: 80px;">
+          <button class="btn btn-primary btn-small" onclick="addExpense()">إضافة</button>
+        </div>
+        <div id="expenses-list"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">📊 الملخص النهائي</div>
+      <div class="section-body">
+        <div class="cost-box">
+          <div class="cost-label">المبلغ الذي يدفعه كل شخص (من 5)</div>
+          <div class="cost-value" id="total-per-person">12,510.97 ر.س</div>
+        </div>
+        <div style="text-align: center; font-size: 11px; color: var(--text-light); margin-top: 10px;">
+          <div>الإضافي: <span id="additional-total">0</span> ريال</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-primary" onclick="shareWhatsApp()">📱 مشاركة واتس</button>
+    </div>
+  </div>
+
+  <!-- ====== TAB 4: ITINERARY ====== -->
+  <div id="itinerary" class="tab-panel">
+    <div class="section">
+      <div class="section-header">📅 الجدول اليومي المفصل</div>
+      <div class="section-body">
+        
+        <!-- اليوم 1 -->
+        <div style="background: #FFF8EE; border-left: 4px solid #BA7517; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+          <div style="font-weight: 700; font-size: 13px; color: #8B5A2B;">4 أغسطس (الثلاثاء) - يوم الوصول</div>
+          <div style="font-size: 12px; color: var(--text); margin-top: 8px; line-height: 1.8;">
+            ✈️ <strong>5:00 ص</strong> - إقلاع من الرياض (Qatar Airways)<br>
+            🛬 <strong>5:10 م</strong> - نصل مطار مايوركا<br>
+            🚗 <strong>6:00 م</strong> - نأخذ السيارات من Hertz<br>
+            🏨 <strong>6:30 م</strong> - نتفقد الفندق Aubamar<br>
+            🍹 <strong>7:30 م</strong> - عشاء بسيط في Rooftop Bar Saratoga (وسط المدينة)
+          </div>
+          <div style="font-size: 11px; color: #6b5230; margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD;">
+            📍 مايوركا | ⏱️ يوم متعب شوي · نصل متأخر
+          </div>
+        </div>
+
+        <!-- اليوم 2 -->
+        <div style="background: #F0F8F5; border-left: 4px solid #1D9E75; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+          <div style="font-weight: 700; font-size: 13px; color: #0F6E56;">5 أغسطس (الأربعاء) - Nikki Beach Day</div>
+          <div style="font-size: 12px; color: var(--text); margin-top: 8px; line-height: 1.8;">
+            ☀️ <strong>11:00 ص</strong> - قهوة في Costa Coffee بسنتر المدينة<br>
+            🎉 <strong>1:00 م</strong> - نروح Nikki Beach Mallorca (أحلى beach club)<br>
+            🏊 <strong>2:00 م</strong> - سباحة ونص<br>
+            🍽️ <strong>4:00 م</strong> - أكل فاخر في المطعم الفندقي<br>
+            🎵 <strong>6:00 م</strong> - موسيقى حية ودي<br>
+            💃 <strong>10:00 م</strong> - رقص لما نحس بالتعب
+          </div>
+          <div style="font-size: 11px; color: #0F6E56; margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD;">
+            📍 مايوركا - Nikki Beach | 🌊 أفضل إطلالة | 💰 VIP Access
+          </div>
+        </div>
+
+        <!-- اليوم 3 -->
+        <div style="background: #F0F8F5; border-left: 4px solid #1D9E75; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+          <div style="font-weight: 700; font-size: 13px; color: #0F6E56;">6 أغسطس (الخميس) - Sa Calobra Adventure</div>
+          <div style="font-size: 12px; color: var(--text); margin-top: 8px; line-height: 1.8;">
+            ☀️ <strong>9:00 ص</strong> - إفطار خفيف وننطلع<br>
+            🚗 <strong>10:00 ص</strong> - نقود لـ Sa Calobra (شاطئ سري وحلو)<br>
+            🛶 <strong>11:00 ص</strong> - نأجر بادل ونطلع في البحر<br>
+            🏊 <strong>12:00 ظ</strong> - سباحة بروح راحة<br>
+            📸 <strong>1:00 م</strong> - صور وفيديوهات لـ الانستا<br>
+            🍽️ <strong>4:00 م</strong> - أكل سمك طازج (Jumeirah Port)<br>
+            🌅 <strong>7:00 م</strong> - نطلع الغروب من الشاطئ
+          </div>
+          <div style="font-size: 11px; color: #0F6E56; margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD;">
+            📍 Sa Calobra | 🛶 Paddle Boarding | 📸 أجمل صور
+          </div>
+        </div>
+
+        <!-- اليوم 4 -->
+        <div style="background: #F0F8F5; border-left: 4px solid #1D9E75; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+          <div style="font-weight: 700; font-size: 13px; color: #0F6E56;">7 أغسطس (الجمعة) - Boat Tour Day</div>
+          <div style="font-size: 12px; color: var(--text); margin-top: 8px; line-height: 1.8;">
+            ☀️ <strong>9:00 ص</strong> - قهوة في Starbucks (عند الميناء)<br>
+            🚤 <strong>10:00 ص</strong> - نركب قارب منظم<br>
+            🤿 <strong>11:00 ص</strong> - غوص سطحي وسباحة في مياه صافية<br>
+            🍽️ <strong>2:00 م</strong> - غداء بسيط في القارب<br>
+            📸 <strong>3:00 م</strong> - صور تحت الماء<br>
+            🍽️ <strong>7:00 م</strong> - عشاء فاخر في Celler Sa Premsa (وسط المدينة)<br>
+            🍷 <strong>9:00 م</strong> - مرطبات بسيطة وراحة
+          </div>
+          <div style="font-size: 11px; color: #0F6E56; margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD;">
+            📍 مايوركا - الميناء | 🌊 رحلة بحرية ممتعة | 🤿 غوص آمن
+          </div>
+        </div>
+
+        <!-- اليوم 5 -->
+        <div style="background: #F0F8F5; border-left: 4px solid #1D9E75; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+          <div style="font-weight: 700; font-size: 13px; color: #0F6E56;">8 أغسطس (السبت) - يوم راحة وتسوق</div>
+          <div style="font-size: 12px; color: var(--text); margin-top: 8px; line-height: 1.8;">
+            ☀️ <strong>10:00 ص</strong> - نقوم بهدوء<br>
+            ☕ <strong>11:00 ص</strong> - قهوة ومعجنات (Costa - سنتر)<br>
+            🏖️ <strong>12:00 ظ</strong> - شاطئ وسباحة عادي<br>
+            🛍️ <strong>2:00 م</strong> - تسوق في المولات (Centro Comercial)<br>
+            ☕ <strong>4:00 م</strong> - قهوة وحلويات (Café du Monde)<br>
+            🧳 <strong>6:00 م</strong> - نحضر الشنط بهدوء<br>
+            🍽️ <strong>8:00 م</strong> - عشاء استرخاء خفيف
+          </div>
+          <div style="font-size: 11px; color: #0F6E56; margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD;">
+            📍 مايوركا | 🧘 يوم راحة | ❤️ آخر يوم بنفسية حلوة
+          </div>
+        </div>
+
+        <!-- اليوم 6 -->
+        <div style="background: #FFE6E6; border-left: 4px solid #FF6B6B; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+          <div style="font-weight: 700; font-size: 13px; color: #8B1538;">9 أغسطس (الأحد) - يوم الانتقال</div>
+          <div style="font-size: 12px; color: var(--text); margin-top: 8px; line-height: 1.8;">
+            🏨 <strong>10:00 ص</strong> - نطلع من الفندق<br>
+            🚗 <strong>11:00 ص</strong> - نرجع السيارة عند Hertz<br>
+            ☕ <strong>12:00 ظ</strong> - قهوة سريعة بمطار مايوركا<br>
+            ✈️ <strong>3:20 م</strong> - إقلاع نحو ايبيزا (ساعة ونص رحلة)<br>
+            🛬 <strong>4:20 م</strong> - نصل ايبيزا<br>
+            🏨 <strong>4:45 م</strong> - Check-in في Ushuaïa (فندق الحفلات)<br>
+            🎉 <strong>7:00 م</strong> - نشوف الفندق ونستريح شوي
+          </div>
+          <div style="font-size: 11px; color: #8B1538; margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD;">
+            📍 مايوركا → ايبيزا | ⚠️ يوم فيه تنقل شوي
+          </div>
+        </div>
+
+        <!-- اليوم 7 -->
+        <div style="background: #EEE5FF; border-left: 4px solid #534AB7; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+          <div style="font-weight: 700; font-size: 13px; color: #3C3489;">10 أغسطس (الاثنين) - Ushuaïa Club Night</div>
+          <div style="font-size: 12px; color: var(--text); margin-top: 8px; line-height: 1.8;">
+            ☀️ <strong>11:00 ص</strong> - نقوم بتأني<br>
+            ☕ <strong>12:00 ظ</strong> - قهوة في بار الفندق<br>
+            🏊 <strong>1:00 م</strong> - سباحة بحرة<br>
+            🍽️ <strong>2:00 م</strong> - أكل فاخر في مطعم الفندق<br>
+            😴 <strong>3:00 م</strong> - قيلولة وسبا<br>
+            🎊 <strong>10:00 م</strong> - حفل Ushuaïa الليلي (أحسن حفل)<br>
+            💃 <strong>11:00 م</strong> - رقص وموسيقى عالمية<br>
+            🌅 <strong>4:00 ص</strong> - ننهي الحفل مع الفجر
+          </div>
+          <div style="font-size: 11px; color: #3C3489; margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD;">
+            📍 ايبيزا - Ushuaïa Club | 🎉 أفضل حفلة | 🌟 Club Access متضمن
+          </div>
+        </div>
+
+        <!-- اليوم 8 -->
+        <div style="background: #EEE5FF; border-left: 4px solid #534AB7; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+          <div style="font-weight: 700; font-size: 13px; color: #3C3489;">11 أغسطس (الثلاثاء) - Formentera Trip (اختياري)</div>
+          <div style="font-size: 12px; color: var(--text); margin-top: 8px; line-height: 1.8;">
+            🌅 <strong>9:00 ص</strong> - قهوة سريعة ونطلع<br>
+            🚤 <strong>9:30 ص</strong> - نركب قارب نحو Formentera (30 دقيقة)<br>
+            🏖️ <strong>10:30 ص</strong> - شاطئ رملي أبيض (Playa Migjorn)<br>
+            🏊 <strong>11:00 ص</strong> - سباحة وغطس<br>
+            🍽️ <strong>1:00 م</strong> - غداء سمك طازج (مطعم شاطئي)<br>
+            📸 <strong>2:00 م</strong> - صور وتصوير<br>
+            🚤 <strong>4:00 م</strong> - نرجع لـ ايبيزا<br>
+            🎉 <strong>10:00 م</strong> - حفل Ushuaïa (الجزء الثاني)
+          </div>
+          <div style="font-size: 11px; color: #3C3489; margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD;">
+            📍 ايبيزا + Formentera | 🏝️ جزيرة سياحية حلوة | 📸 صور جنن
+          </div>
+        </div>
+
+        <!-- اليوم 9 -->
+        <div style="background: #EEE5FF; border-left: 4px solid #534AB7; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+          <div style="font-weight: 700; font-size: 13px; color: #3C3489;">12 أغسطس (الأربعاء) - يوم وداع</div>
+          <div style="font-size: 12px; color: var(--text); margin-top: 8px; line-height: 1.8;">
+            ☀️ <strong>11:00 ص</strong> - نقوم بهدوء<br>
+            ☕ <strong>12:00 ظ</strong> - قهوة في كافيه الشاطئ<br>
+            🏖️ <strong>1:00 م</strong> - استرخاء وقراءة على البحر<br>
+            🍽️ <strong>2:00 م</strong> - أكل فاخر (آخر مرة)<br>
+            📸 <strong>3:00 م</strong> - صور جماعية تذكارية<br>
+            💆 <strong>5:00 م</strong> - spa وتدليك<br>
+            🎊 <strong>9:00 م</strong> - عشاء وداع خاص<br>
+            🌙 <strong>11:00 م</strong> - احتفالية وداع والرقص
+          </div>
+          <div style="font-size: 11px; color: #3C3489; margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD;">
+            📍 ايبيزا | 😊 يوم حلو جداً | ❤️ لحظات ما ننساها
+          </div>
+        </div>
+
+        <!-- اليوم 10 -->
+        <div style="background: #FFE6E6; border-left: 4px solid #FF6B6B; padding: 12px; border-radius: 8px;">
+          <div style="font-weight: 700; font-size: 13px; color: #8B1538;">13 أغسطس (الخميس) - العودة</div>
+          <div style="font-size: 12px; color: var(--text); margin-top: 8px; line-height: 1.8;">
+            🏨 <strong>10:00 ص</strong> - نطلع من الفندق<br>
+            ☕ <strong>12:00 ظ</strong> - قهوة أخيرة بمطار ايبيزا<br>
+            ✈️ <strong>3:00 م</strong> - طيران ملقا → الرياض (معاذ بس)<br>
+            🏠 <strong>منتصف الليل</strong> - نصل الرياض<br>
+            <br>
+            <strong style="color: #8B1538;">ملاحظة:</strong> الباقي يقضون يوم إضافي أو يسافرون وقت ثاني
+          </div>
+          <div style="font-size: 11px; color: #8B1538; margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD;">
+            📍 ايبيزا → الرياض | 👤 معاذ | 🏡 العودة للبيت
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">💡 ملخص الأنشطة البارزة</div>
+      <div class="section-body">
+        <div style="margin-bottom: 14px;">
+          <strong style="color: var(--primary);">🏝️ أنشطة مايوركا (5 ليالٍ)</strong>
+          <div style="font-size: 12px; color: var(--text-light); margin-top: 6px; line-height: 1.8;">
+            ✓ <strong>Nikki Beach VIP</strong> - أفضل beach club<br>
+            ✓ <strong>Sa Calobra</strong> - شاطئ سري مع بادل برد<br>
+            ✓ <strong>جولة قارب وغوص</strong> - استكشاف بحري<br>
+            ✓ <strong>Jumeirah Sunset</strong> - عشاء مع إطلالة<br>
+            ✓ <strong>Paddle Boarding</strong> - رياضة مائية ممتعة
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border); padding-top: 14px;">
+          <strong style="color: var(--primary);">🎉 أنشطة ايبيزا (4 ليالٍ)</strong>
+          <div style="font-size: 12px; color: var(--text-light); margin-top: 6px; line-height: 1.8;">
+            ✓ <strong>Ushuaïa Club</strong> - حفلات يومية عالمية<br>
+            ✓ <strong>Formentera</strong> - جزيرة سياحية جميلة<br>
+            ✓ <strong>Club Access</strong> - دخول VIP مضمون<br>
+            ✓ <strong>حفل وداع</strong> - احتفالية خاصة<br>
+            ✓ <strong>Sunset Party</strong> - حفلات كل مساء
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== TAB 5: CHECKLIST ====== -->
+
+  <!-- ====== TAB 5: ALERTS ====== -->
+  <div id="alerts" class="tab-panel">
+    <div class="section">
+      <div class="section-header">📋 قبل السفر (يجب نتأكد)</div>
+      <div class="section-body">
+        <div id="alerts-checklist"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">🧳 الأغراض المهمة</div>
+      <div class="section-body">
+        <div id="packing-checklist"></div>
+        
+        <!-- إضافة أغراض جديدة -->
+        <div class="add-expense-form" style="margin-top: 12px;">
+          <input type="text" id="new-item-name" placeholder="أضيف غرض" style="flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 12px;">
+          <button class="btn btn-primary btn-small" onclick="addItem()" style="margin-bottom: 0;">+ إضيف</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-primary" onclick="resetAllChecklists()">🔄 إعادة تعيين</button>
+    </div>
+  </div>
+
+  <!-- ====== TAB 6: NOTES ====== -->
+  <div id="notes" class="tab-panel">
+    <div class="section">
+      <div class="section-header">📝 ملاحظاتي</div>
+      <div class="section-body">
+        <textarea class="form-textarea" id="general-notes" placeholder="اكتب أي ملاحظة مهمة..." style="height: 150px;"></textarea>
+        <button class="btn btn-primary" style="margin-top: 12px;" onclick="saveNotes()">💾 حفظ</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">⚠️ معلومات مهمة</div>
+      <div class="section-body">
+        <div class="notes-box">
+          <strong>🩹 تأمين صحي:</strong> تأكد من وجود تأمين صحي سارٍ
+        </div>
+        <div class="notes-box">
+          <strong>🛂 جواز السفر:</strong> تاريخ انتهاء الصلاحية لا يقل عن 6 أشهر
+        </div>
+        <div class="notes-box">
+          <strong>💳 بطاقات بنكية:</strong> أخذ أكثر من بطاقة
+        </div>
+        <div class="notes-box">
+          <strong>📱 الهاتف:</strong> تفعيل التجوال الدولي
+        </div>
+        <div class="notes-box">
+          <strong>🌐 العملة:</strong> اليورو (EUR) | سعر الصرف التقريبي: 1 EUR = 4.15 ريال
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ====== THEME ======
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+  updateThemeBtn();
+}
+
+function updateThemeBtn() {
+  document.querySelector('.theme-btn').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+}
+
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+  updateThemeBtn();
+}
+
+// ====== TABS ======
+function switchTab(tab) {
+  try {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    
+    const tabPanel = document.getElementById(tab);
+    if (tabPanel) {
+      tabPanel.classList.add('active');
+    }
+    
+    // تنشيط الزر الصحيح
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+      const onclickAttr = btn.getAttribute('onclick');
+      if (onclickAttr && onclickAttr.includes(`'${tab}'`)) {
+        btn.classList.add('active');
+      }
+    });
+    
+    localStorage.setItem('lastTab', tab);
+  } catch (err) {
+    console.error('خطأ في switchTab:', err);
+  }
+}
+
+// ====== COUNTDOWN ======
+function updateCountdown() {
+  const target = new Date('2026-08-04T00:00:00').getTime();
+  const now = new Date().getTime();
+  const diff = target - now;
+  
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML = '🎉 الرحلة بدأت! استمتع!';
+    return;
+  }
+  
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  document.getElementById('countdown').innerHTML = `⏳ <strong>${days}</strong> يوم و <strong>${hours}</strong> ساعة`;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 3600000);
+
+// ====== EXPENSES ======
+const FIXED_COST = 12510.97;
+const NUM_PEOPLE = 5;
+let expenses = [];
+
+function addExpense() {
+  const name = document.getElementById('expense-name').value.trim();
+  const amount = parseFloat(document.getElementById('expense-amount').value) || 0;
+  
+  if (!name || amount <= 0) {
+    alert('أدخل اسم المصروف والمبلغ');
+    return;
+  }
+  
+  expenses.push({ id: Date.now(), name, amount });
+  localStorage.setItem('expenses', JSON.stringify(expenses));
+  document.getElementById('expense-name').value = '';
+  document.getElementById('expense-amount').value = '';
+  renderExpenses();
+  updateTotals();
+}
+
+function deleteExpense(id) {
+  expenses = expenses.filter(e => e.id !== id);
+  localStorage.setItem('expenses', JSON.stringify(expenses));
+  renderExpenses();
+  updateTotals();
+}
+
+function renderExpenses() {
+  const html = expenses.map(e => `
+    <div class="expense-item">
+      <div class="expense-info">
+        <div class="expense-name">${e.name}</div>
+        <div class="expense-per">${(e.amount / NUM_PEOPLE).toFixed(2)} ريال للفرد</div>
+      </div>
+      <div class="expense-amount">${e.amount.toFixed(0)} ر.س</div>
+      <button class="delete-btn" onclick="deleteExpense(${e.id})">حذف</button>
+    </div>
+  `).join('');
+  document.getElementById('expenses-list').innerHTML = html;
+}
+
+function updateTotals() {
+  const additional = expenses.reduce((s, e) => s + e.amount, 0);
+  const perPerson = FIXED_COST + (additional / NUM_PEOPLE);
+  
+  document.getElementById('additional-total').textContent = additional.toFixed(0);
+  document.getElementById('total-per-person').textContent = perPerson.toFixed(2) + ' ر.س';
+  document.getElementById('quick-total').textContent = perPerson.toFixed(2) + ' ر.س';
+}
+
+// ====== BOOKINGS ======
+function saveBookings() {
+  const bookings = {
+    flight1: {
+      name: document.getElementById('flight1-name').value,
+      ref: document.getElementById('flight1-ref').value,
+      price: document.getElementById('flight1-price').value,
+      link: document.getElementById('flight1-link').value,
+      notes: document.getElementById('flight1-notes').value
+    },
+    hotel1: {
+      name: document.getElementById('hotel1-name').value,
+      ref: document.getElementById('hotel1-ref').value,
+      price: document.getElementById('hotel1-price').value,
+      phone: document.getElementById('hotel1-phone').value,
+      link: document.getElementById('hotel1-link').value,
+      notes: document.getElementById('hotel1-notes').value
+    },
+    car1: {
+      name: document.getElementById('car1-name').value,
+      ref: document.getElementById('car1-ref').value,
+      price: document.getElementById('car1-price').value,
+      phone: document.getElementById('car1-phone').value,
+      link: document.getElementById('car1-link').value,
+      notes: document.getElementById('car1-notes').value
+    },
+    flight2: {
+      ref: document.getElementById('flight2-ref').value,
+      price: document.getElementById('flight2-price').value,
+      link: document.getElementById('flight2-link').value,
+      notes: document.getElementById('flight2-notes').value
+    },
+    hotel2: {
+      name: document.getElementById('hotel2-name').value,
+      ref: document.getElementById('hotel2-ref').value,
+      price: document.getElementById('hotel2-price').value,
+      phone: document.getElementById('hotel2-phone').value,
+      link: document.getElementById('hotel2-link').value,
+      notes: document.getElementById('hotel2-notes').value
+    }
+  };
+  localStorage.setItem('bookings', JSON.stringify(bookings));
+  alert('✅ تم حفظ الحجوزات');
+}
+
+function clearBookings() {
+  if (!confirm('هل متأكد؟')) return;
+  ['flight1-name', 'flight1-ref', 'flight1-price', 'flight1-link', 'flight1-notes',
+   'hotel1-name', 'hotel1-ref', 'hotel1-price', 'hotel1-phone', 'hotel1-link', 'hotel1-notes',
+   'car1-name', 'car1-ref', 'car1-price', 'car1-phone', 'car1-link', 'car1-notes',
+   'flight2-ref', 'flight2-price', 'flight2-link', 'flight2-notes',
+   'hotel2-name', 'hotel2-ref', 'hotel2-price', 'hotel2-phone', 'hotel2-link', 'hotel2-notes'
+  ].forEach(id => document.getElementById(id).value = '');
+  localStorage.removeItem('bookings');
+  alert('✅ تم المسح');
+}
+
+function loadBookings() {
+  const saved = localStorage.getItem('bookings');
+  if (!saved) return;
+  const b = JSON.parse(saved);
+  
+  if (b.flight1) {
+    document.getElementById('flight1-name').value = b.flight1.name || '';
+    document.getElementById('flight1-ref').value = b.flight1.ref || '';
+    document.getElementById('flight1-price').value = b.flight1.price || '';
+    document.getElementById('flight1-link').value = b.flight1.link || '';
+    document.getElementById('flight1-notes').value = b.flight1.notes || '';
+  }
+  if (b.hotel1) {
+    document.getElementById('hotel1-name').value = b.hotel1.name || '';
+    document.getElementById('hotel1-ref').value = b.hotel1.ref || '';
+    document.getElementById('hotel1-price').value = b.hotel1.price || '';
+    document.getElementById('hotel1-phone').value = b.hotel1.phone || '';
+    document.getElementById('hotel1-link').value = b.hotel1.link || '';
+    document.getElementById('hotel1-notes').value = b.hotel1.notes || '';
+  }
+  if (b.car1) {
+    document.getElementById('car1-name').value = b.car1.name || '';
+    document.getElementById('car1-ref').value = b.car1.ref || '';
+    document.getElementById('car1-price').value = b.car1.price || '';
+    document.getElementById('car1-phone').value = b.car1.phone || '';
+    document.getElementById('car1-link').value = b.car1.link || '';
+    document.getElementById('car1-notes').value = b.car1.notes || '';
+  }
+  if (b.flight2) {
+    document.getElementById('flight2-ref').value = b.flight2.ref || '';
+    document.getElementById('flight2-price').value = b.flight2.price || '';
+    document.getElementById('flight2-link').value = b.flight2.link || '';
+    document.getElementById('flight2-notes').value = b.flight2.notes || '';
+  }
+  if (b.hotel2) {
+    document.getElementById('hotel2-name').value = b.hotel2.name || '';
+    document.getElementById('hotel2-ref').value = b.hotel2.ref || '';
+    document.getElementById('hotel2-price').value = b.hotel2.price || '';
+    document.getElementById('hotel2-phone').value = b.hotel2.phone || '';
+    document.getElementById('hotel2-link').value = b.hotel2.link || '';
+    document.getElementById('hotel2-notes').value = b.hotel2.notes || '';
+  }
+}
+
+// ====== SETTLEMENT ======
+const people = [
+  { name: 'معاذ', paid: 3330 },
+  { name: 'انس', paid: 20100 },
+  { name: 'مالك', paid: 30571.87 },
+  { name: 'محمد', paid: 0 },
+  { name: 'عبدالملك', paid: 8420 }
+];
+
+function renderSettlement(perPerson) {
+  let html = '';
+  people.forEach(p => {
+    const balance = p.paid - perPerson;
+    const cls = balance >= 0 ? 'settlement-positive' : 'settlement-negative';
+    const text = balance >= 0 ? `+${balance.toFixed(2)}` : balance.toFixed(2);
+    html += `
+      <div class="settlement-card">
+        <div class="settlement-name">${p.name}</div>
+        <div class="settlement-row"><span>دفع:</span> <span>${p.paid.toFixed(0)} ريال</span></div>
+        <div class="settlement-row"><span>يستحق:</span> <span>${perPerson.toFixed(2)} ريال</span></div>
+        <div class="settlement-balance ${cls}">${balance >= 0 ? '✅ رصيد' : '❌ دين'}: ${text} ريال</div>
+      </div>
+    `;
+  });
+  document.getElementById('settlement-list').innerHTML = html;
+  
+  // Transfers
+  const transfers = [];
+  for (let i = 0; i < people.length; i++) {
+    for (let j = i + 1; j < people.length; j++) {
+      const b1 = people[i].paid - perPerson;
+      const b2 = people[j].paid - perPerson;
+      
+      if ((b1 > 0 && b2 < 0) || (b1 < 0 && b2 > 0)) {
+        if (b1 > 0 && b2 < 0) {
+          transfers.push({ from: people[j].name, to: people[i].name, amount: Math.min(b1, Math.abs(b2)) });
+        } else {
+          transfers.push({ from: people[i].name, to: people[j].name, amount: Math.min(Math.abs(b1), b2) });
+        }
+      }
+    }
+  }
+  
+  html = transfers.length === 0 ? '<div class="transfer-box">✅ لا توجد تحويلات</div>' :
+    transfers.map(t => `
+      <div class="transfer-box">
+        <span><strong>${t.from}</strong> يحول لـ <strong>${t.to}</strong>: <strong>${t.amount.toFixed(2)}</strong> ريال</span>
+        <button class="copy-btn" onclick="copyToClipboard('${t.from} يحول لـ ${t.to}: ${t.amount.toFixed(2)} ريال')">نسخ</button>
+      </div>
+    `).join('');
+  document.getElementById('transfers-list').innerHTML = html;
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => alert('✅ تم النسخ'));
+}
+
+// ====== CHECKLIST ======
+const defaultChecklistItems = [
+  'جواز السفر',
+  'التأمين الصحي والبطاقة',
+  'البطاقات البنكية',
+  'الهاتف + شريحة',
+  'شنطة السفر',
+  'الملابس'
+];
+
+const defaultPackingItems = [
+  'حذاء مريح',
+  'ملابس سباحة',
+  'واقي الشمس',
+  'نظارة شمسية',
+  'شنطة الشاطئ',
+  'أدوية شخصية',
+  'شطاف (احتياط)',
+  'شاحن الهاتف وافياش'
+];
+
+let customPackingItems = [];
+
+function renderChecklist() {
+  // قائمة قبل السفر
+  let html = defaultChecklistItems.map((item, i) => `
+    <div class="checklist-item">
+      <input type="checkbox" id="prep-${i}" onchange="saveAllChecklists()">
+      <label class="checklist-label" for="prep-${i}">${item}</label>
+    </div>
+  `).join('');
+  document.getElementById('alerts-checklist').innerHTML = html;
+  
+  // قائمة الأغراض (الافتراضية + المضافة)
+  const allItems = [...defaultPackingItems, ...customPackingItems];
+  html = allItems.map((item, i) => {
+    const isCustom = i >= defaultPackingItems.length;
+    return `
+      <div class="checklist-item">
+        <input type="checkbox" id="pack-${i}" onchange="saveAllChecklists()">
+        <label class="checklist-label" for="pack-${i}">${item}</label>
+        ${isCustom ? `<button class="delete-btn" onclick="deletePackItem(${i})">حذف</button>` : ''}
+      </div>
+    `;
+  }).join('');
+  document.getElementById('packing-checklist').innerHTML = html;
+  
+  loadAllChecklists();
+}
+
+function addItem() {
+  const name = document.getElementById('new-item-name').value.trim();
+  if (!name) {
+    alert('أدخل اسم الغرض');
+    return;
+  }
+  
+  customPackingItems.push(name);
+  localStorage.setItem('customPackingItems', JSON.stringify(customPackingItems));
+  document.getElementById('new-item-name').value = '';
+  renderChecklist();
+}
+
+function deletePackItem(index) {
+  const customIndex = index - defaultPackingItems.length;
+  if (customIndex >= 0) {
+    customPackingItems.splice(customIndex, 1);
+    localStorage.setItem('customPackingItems', JSON.stringify(customPackingItems));
+    renderChecklist();
+  }
+}
+
+function saveAllChecklists() {
+  const checks = {};
+  document.querySelectorAll('.checklist-item input').forEach((cb, i) => {
+    checks[i] = cb.checked;
+  });
+  localStorage.setItem('checklist', JSON.stringify(checks));
+}
+
+function loadAllChecklists() {
+  const saved = localStorage.getItem('checklist');
+  const customSaved = localStorage.getItem('customPackingItems');
+  
+  if (customSaved) {
+    customPackingItems = JSON.parse(customSaved);
+  }
+  
+  if (!saved) return;
+  const checks = JSON.parse(saved);
+  document.querySelectorAll('.checklist-item input').forEach((cb, i) => {
+    cb.checked = checks[i] || false;
+  });
+}
+
+function resetAllChecklists() {
+  if (!confirm('تبي تمسح كل الشيكات؟')) return;
+  document.querySelectorAll('.checklist-item input').forEach(cb => cb.checked = false);
+  localStorage.removeItem('checklist');
+  alert('✅ تم المسح');
+}
+
+// ====== NOTES ======
+function saveNotes() {
+  const notes = document.getElementById('general-notes').value;
+  localStorage.setItem('notes', notes);
+  alert('✅ تم حفظ الملاحظات');
+}
+
+function loadNotes() {
+  const notes = localStorage.getItem('notes');
+  if (notes) document.getElementById('general-notes').value = notes;
+}
+
+// ====== SHARE ======
+function shareWhatsApp() {
+  const additional = expenses.reduce((s, e) => s + e.amount, 0);
+  const total = FIXED_COST + (additional / NUM_PEOPLE);
+  const msg = encodeURIComponent(
+    `🌍 رحلة إسبانيا 2026\n\nالمبلغ لكل شخص: ${total.toFixed(2)} ريال\n\n📊 المصاريف:\n• الطيران: 2,351 ريال\n• الفنادق: 9,295.37 ريال\n• السيارة: 864.60 ريال\n${additional > 0 ? `• إضافي: ${additional.toFixed(0)} ريال\n` : ''}\nشوف التفاصيل الكاملة في الصفحة ✈️`
+  );
+  window.open(`https://wa.me/?text=${msg}`);
+}
+
+function shareSettlement() {
+  const additional = expenses.reduce((s, e) => s + e.amount, 0);
+  const total = FIXED_COST + (additional / NUM_PEOPLE);
+  let msg = '🧾 التسويات:\n\n';
+  people.forEach(p => {
+    const balance = p.paid - total;
+    msg += `${p.name}: ${balance >= 0 ? '+' : ''}${balance.toFixed(2)} ريال\n`;
+  });
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+}
+
+
+// ====== LOAD ======
+window.addEventListener('load', () => {
+  try {
+    const lastTab = localStorage.getItem('lastTab') || 'overview';
+    switchTab(lastTab);
+    
+    const saved = localStorage.getItem('expenses');
+    if (saved) {
+      expenses = JSON.parse(saved);
+      renderExpenses();
+      updateTotals();
+    }
+    
+    loadBookings();
+    loadNotes();
+    renderChecklist();
+  } catch (err) {
+    console.error('خطأ في التحميل:', err);
+    switchTab('overview');
+  }
+});
+</script>
+
+</body>
+</html>
