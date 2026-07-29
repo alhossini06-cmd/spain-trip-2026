@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#534AB7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ايبيزا">
+<link rel="manifest" href="manifest.json">
+<title>ايبيزا 9-13 أغسطس</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --primary: #534AB7;
+    --bg: #1a1a1a;
+    --card-bg: #2a2a2a;
+    --text: #ffffff;
+    --text-light: #aaaaaa;
+    --border: #444;
+  }
+  
+  body.light-mode {
+    --bg: #ffffff;
+    --card-bg: #f5f5f5;
+    --text: #1a1a1a;
+    --text-light: #666666;
+    --border: #ddd;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+    padding-bottom: 80px;
+  }
+  
+  .container { max-width: 600px; margin: 0 auto; padding: 1.5rem 1rem; }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 10px;
+  }
+  
+  .title { font-size: 24px; font-weight: 700; text-align: center; flex: 1; }
+  .subtitle { font-size: 12px; color: var(--text-light); text-align: center; }
+  
+  .theme-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    border-left: 4px solid var(--primary);
+  }
+  
+  .section-header {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .place-item {
+    background: var(--bg);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--primary);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .place-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-top: 2px;
+    accent-color: var(--primary);
+    flex-shrink: 0;
+  }
+  
+  .place-item input[type="checkbox"]:checked + .place-info {
+    opacity: 0.6;
+    text-decoration: line-through;
+  }
+  
+  .place-info {
+    flex: 1;
+  }
+  
+  .place-name {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  
+  .place-details {
+    font-size: 11px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  
+  .place-vibe {
+    font-size: 10px;
+    color: var(--primary);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  
+  .progress {
+    background: var(--border);
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 12px 0;
+  }
+  
+  .progress-bar {
+    background: var(--primary);
+    height: 100%;
+    width: 0%;
+    transition: 0.3s;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  
+  .nav-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+  }
+  
+  .btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+  
+  .btn-secondary {
+    background: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  
+  .day-header {
+    background: linear-gradient(135deg, var(--primary) 0%, rgba(83,74,183,0.7) 100%);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title">🎉 ايبيزا</h1>
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+  </div>
+  <p class="subtitle">9-13 أغسطس | أحسن الحفلات والاسترخاء</p>
+  
+  <!-- Progress -->
+  <div style="margin-bottom: 1.5rem;">
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="stats">
+      <div>تم: <strong id="visited">0</strong></div>
+      <div>الكل: <strong id="total">0</strong></div>
+      <div id="percentage">0%</div>
+    </div>
+  </div>
+  
+  <!-- اليوم 1 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم الأول - 9 أغسطس (الأحد) - الوصول</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-1" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">✈️ الوصول لايبيزا</div>
+        <div class="place-details">4:20 م - رحلة من مايوركا (Vueling)</div>
+        <div class="place-vibe">🎉 الفايب: دخول القاهرة</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-2" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏨 Ushuaïa Ibiza Beach Hotel</div>
+        <div class="place-details">4:45 م - Check-in | Club Superior Room مع Club Access</div>
+        <div class="place-vibe">🎉 الفايب: فندق الحفلات الأسطوري</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- اليوم 2 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم الثاني - 10 أغسطس (الاثنين)</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-3" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">☕ قهوة بار الفندق</div>
+        <div class="place-details">11:00 ص - استيقاظ هادئ بالشاطئ</div>
+        <div class="place-vibe">🌊 الفايب: استرخاء صباحي</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-4" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏊 سباحة بحرة</div>
+        <div class="place-details">1:00 م - حمام سباحة الفندق + شاطئ</div>
+        <div class="place-vibe">☀️ الفايب: استرخاء شمسي</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-5" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🍽️ أكل فاخر</div>
+        <div class="place-details">2:00 م - مطعم الفندق بإطلالة بحرية</div>
+        <div class="place-vibe">🍽️ الفايب: تجربة ذواق</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-6" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">😴 قيلولة وسبا</div>
+        <div class="place-details">3:00 م - تدليك وسبا الفندق</div>
+        <div class="place-vibe">💆 الفايب: راحة كاملة</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-7" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🎊 حفل Ushuaïa الليلي ⭐ MAIN EVENT</div>
+        <div class="place-details">10:00 م - أحسن حفل | DJ عالمي | موسيقى حية</div>
+        <div class="place-vibe">🔥 الفايب: حفلة الحياة</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-8" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">💃 رقص وموسيقى</div>
+        <div class="place-details">11:00 م - 4:00 ص | موسيقى عالمية ورقص</div>
+        <div class="place-vibe">🌟 الفايب: ليلة لا تُنسى</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- اليوم 3 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم الثالث - 11 أغسطس (الثلاثاء) - Formentera اختياري</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-9" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">☕ قهوة سريعة</div>
+        <div class="place-details">9:00 ص - استيقاظ للرحلة</div>
+        <div class="place-vibe">⚡ الفايب: طاقة جديدة</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-10" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🚤 رحلة قارب لفورمنتيرا</div>
+        <div class="place-details">9:30 ص - 30 دقيقة | جزيرة سياحية حلوة</div>
+        <div class="place-vibe">🌊 الفايب: مغامرة بحرية</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-11" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏖️ Playa Migjorn</div>
+        <div class="place-details">10:30 ص - شاطئ رملي أبيض | سباحة وغطس</div>
+        <div class="place-vibe">🏝️ الفايب: طبيعة نقية</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-12" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🍽️ غداء سمك طازج</div>
+        <div class="place-details">1:00 م - مطعم شاطئي | أسماك طازة</div>
+        <div class="place-vibe">🐟 الفايب: طعام ساحلي</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-13" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">📸 صور وتصوير</div>
+        <div class="place-details">2:00 م - لحظات تذكارية جميلة</div>
+        <div class="place-vibe">📷 الفايب: ذكريات</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-14" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🚤 العودة لايبيزا</div>
+        <div class="place-details">4:00 م - 30 دقيقة | رحلة العودة</div>
+        <div class="place-vibe">🌅 الفايب: غروب جميل</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-15" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🎉 حفل Ushuaïa (الجزء الثاني)</div>
+        <div class="place-details">10:00 م - ليلة ثانية من الحفلات</div>
+        <div class="place-vibe">🔥 الفايب: استمرار السحر</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- اليوم 4 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم الرابع - 12 أغسطس (الأربعاء) - يوم الوداع</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-16" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">☀️ استيقاظ هادئ</div>
+        <div class="place-details">11:00 ص - قهوة وإفطار</div>
+        <div class="place-vibe">🌅 الفايب: يوم حلو</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-17" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">☕ قهوة في كافيه الشاطئ</div>
+        <div class="place-details">12:00 ظ - منظر البحر والاسترخاء</div>
+        <div class="place-vibe">🌊 الفايب: سلام</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-18" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏖️ استرخاء وقراءة</div>
+        <div class="place-details">1:00 م - وقت شخصي على الشاطئ</div>
+        <div class="place-vibe">📚 الفايب: هدوء</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-19" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🍽️ أكل فاخر (آخر مرة)</div>
+        <div class="place-details">2:00 م - مطعم الفندق | وجبة فاخرة</div>
+        <div class="place-vibe">🍽️ الفايب: تكريم الذكريات</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-20" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">📸 صور جماعية تذكارية</div>
+        <div class="place-details">3:00 م - لقطات عائلية جميلة</div>
+        <div class="place-vibe">👥 الفايب: تذكار</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-21" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">💆 سبا وتدليك</div>
+        <div class="place-details">5:00 م - استرخاء نهائي</div>
+        <div class="place-vibe">🧘 الفايب: راحة الروح</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-22" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🎊 عشاء وداع خاص</div>
+        <div class="place-details">9:00 م - وليمة وداع</div>
+        <div class="place-vibe">❤️ الفايب: لحظات غالية</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-23" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🌙 احتفالية وداع والرقص</div>
+        <div class="place-details">11:00 م - ليلة وداع حفلية</div>
+        <div class="place-vibe">💫 الفايب: ذكريات خالدة</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- اليوم 5 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم الخامس - 13 أغسطس (الخميس) - الرحيل</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-24" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">✈️ معاذ: ايبيزا → ملقا → الرياض</div>
+        <div class="place-details">معاذ فقط | رحلة منفصلة | Ryanair</div>
+        <div class="place-vibe">👋 الفايب: عودة آمنة</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-25" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🎬 الجميع: نهاية الحكاية</div>
+        <div class="place-details">تفرق المجموعة | ذكريات أبدية</div>
+        <div class="place-vibe">🌟 الفايب: شكراً على الذكريات</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-buttons">
+  <button class="btn btn-secondary" onclick="goToPalma()">← عود لمايوركا</button>
+  <button class="btn btn-primary" onclick="resetAll()">🔄 إعادة تعيين</button>
+</div>
+
+<script>
+// ====== THEME ======
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  localStorage.setItem('ibizaTheme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+}
+
+// ====== PROGRESS ======
+function updateProgress() {
+  const total = 25;
+  const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+  const percentage = Math.round((checked / total) * 100);
+  
+  document.getElementById('visited').textContent = checked;
+  document.getElementById('total').textContent = total;
+  document.getElementById('percentage').textContent = percentage + '%';
+  document.getElementById('progressBar').style.width = percentage + '%';
+  
+  saveProgress();
+}
+
+// ====== STORAGE ======
+function saveProgress() {
+  const checks = {};
+  document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+    checks[i] = cb.checked;
+  });
+  localStorage.setItem('ibizaPlaces', JSON.stringify(checks));
+}
+
+function loadProgress() {
+  const saved = localStorage.getItem('ibizaPlaces');
+  if (!saved) return;
+  
+  const checks = JSON.parse(saved);
+  document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+    cb.checked = checks[i] || false;
+  });
+  updateProgress();
+}
+
+function resetAll() {
+  if (!confirm('تبي تمسح كل الخيارات؟')) return;
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+  localStorage.removeItem('ibizaPlaces');
+  updateProgress();
+}
+
+function goToPalma() {
+  window.location.href = 'palma.html';
+}
+
+// ====== LOAD ======
+window.addEventListener('load', () => {
+  const theme = localStorage.getItem('ibizaTheme');
+  if (theme === 'light') {
+    document.body.classList.add('light-mode');
+  }
+  loadProgress();
+});
+
+// PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+
+</body>
+</html>

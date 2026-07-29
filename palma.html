@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FF6B35">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="مايوركا">
+<link rel="manifest" href="manifest.json">
+<title>مايوركا 4-9 أغسطس</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --primary: #FF6B35;
+    --bg: #1a1a1a;
+    --card-bg: #2a2a2a;
+    --text: #ffffff;
+    --text-light: #aaaaaa;
+    --border: #444;
+  }
+  
+  body.light-mode {
+    --bg: #ffffff;
+    --card-bg: #f5f5f5;
+    --text: #1a1a1a;
+    --text-light: #666666;
+    --border: #ddd;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+    padding-bottom: 80px;
+  }
+  
+  .container { max-width: 600px; margin: 0 auto; padding: 1.5rem 1rem; }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 10px;
+  }
+  
+  .title { font-size: 24px; font-weight: 700; text-align: center; flex: 1; }
+  .subtitle { font-size: 12px; color: var(--text-light); text-align: center; }
+  
+  .theme-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    border-left: 4px solid var(--primary);
+  }
+  
+  .section-header {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .place-item {
+    background: var(--bg);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--primary);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .place-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-top: 2px;
+    accent-color: var(--primary);
+    flex-shrink: 0;
+  }
+  
+  .place-item input[type="checkbox"]:checked + .place-info {
+    opacity: 0.6;
+    text-decoration: line-through;
+  }
+  
+  .place-info {
+    flex: 1;
+  }
+  
+  .place-name {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  
+  .place-details {
+    font-size: 11px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  
+  .place-vibe {
+    font-size: 10px;
+    color: var(--primary);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  
+  .progress {
+    background: var(--border);
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 12px 0;
+  }
+  
+  .progress-bar {
+    background: var(--primary);
+    height: 100%;
+    width: 0%;
+    transition: 0.3s;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  
+  .nav-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+  }
+  
+  .btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+  
+  .btn-secondary {
+    background: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  
+  .day-header {
+    background: linear-gradient(135deg, var(--primary) 0%, rgba(255,107,53,0.7) 100%);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title">🌅 مايوركا</h1>
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+  </div>
+  <p class="subtitle">4-9 أغسطس | الأماكن الترند والفخمة</p>
+  
+  <!-- Progress -->
+  <div style="margin-bottom: 1.5rem;">
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="stats">
+      <div>تم: <strong id="visited">0</strong></div>
+      <div>الكل: <strong id="total">0</strong></div>
+      <div id="percentage">0%</div>
+    </div>
+  </div>
+  
+  <!-- اليوم 1 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم الأول - 4 أغسطس (الثلاثاء)</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-1" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">✈️ قدوم الرياض → مايوركا</div>
+        <div class="place-details">Qatar Airways | 5:00 ص - 5:10 م</div>
+        <div class="place-vibe">وصول آمن وفندق فخم</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-2" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏨 Aubamar Palma Resort & Spa</div>
+        <div class="place-details">Check-in والاسترخاء بعد الطيران</div>
+        <div class="place-vibe">⭐ الفايب: الراحة والفخامة</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-3" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🍹 Rooftop Bar Saratoga</div>
+        <div class="place-details">7:30 م - مشروب الترحيب ومنظر المدينة الليلي</div>
+        <div class="place-vibe">⭐ الفايب: ترند وأضواء المدينة</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- اليوم 2 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم الثاني - 5 أغسطس (الأربعاء)</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-4" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">☕ Costa Coffee</div>
+        <div class="place-details">9:00 ص - قهوة الصباح والاستيقاظ</div>
+        <div class="place-vibe">⭐ الفايب: استرخاء صباحي</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-5" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏛️ كاتدرائية بالما</div>
+        <div class="place-details">10:00 ص - 12:30 م | ⭐ 4.7/5 | صرح معماري ضخم</div>
+        <div class="place-vibe">⭐ الفايب: تاريخي وفن معماري</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-6" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏖️ Nikki Beach Mallorca VIP</div>
+        <div class="place-details">3:00 م - شمس وعصير وأجواء ترند</div>
+        <div class="place-vibe">⭐ الفايب: شبابي وفاخر</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- اليوم 3 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم الثالث - 6 أغسطس (الخميس)</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-7" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏘️ Sóller (سويير)</div>
+        <div class="place-details">9:00 ص - قرية ريفية كلاسيكية | مبان حجرية تاريخية</div>
+        <div class="place-vibe">⭐ الفايب: تاريخي وتصويري</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-8" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏘️ Valldemossa (فايديموسا)</div>
+        <div class="place-details">11:30 ص - دير تاريخي وإطلالات خلابة</div>
+        <div class="place-vibe">⭐ الفايب: هدوء وطبيعة</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-9" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏖️ Sa Calobra (سا كالوبرا)</div>
+        <div class="place-details">2:00 م - شاطئ بمياه فيروزية صافية | Paddle Boarding</div>
+        <div class="place-vibe">⭐ الفايب: مغامرة وطبيعة</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-10" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🍽️ Jumeirah Port Sóller</div>
+        <div class="place-details">6:00 م - مطعم فاخر بإطلالة بحرية</div>
+        <div class="place-vibe">⭐ الفايب: رومانسي وفاخر</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- اليوم 4 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم الرابع - 7 أغسطس (الجمعة)</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-11" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">☕ Starbucks - ميناء سويير</div>
+        <div class="place-details">9:00 ص - قهوة بمنظر الميناء</div>
+        <div class="place-vibe">⭐ الفايب: هدوء مع أجواء</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-12" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏘️ Deià (ديا)</div>
+        <div class="place-details">10:00 ص - قرية ساحلية جبلية نادرة | مفضلة للفنانين</div>
+        <div class="place-vibe">⭐ الفايب: فني وهادئ</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-13" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🍽️ Ca's Patró March ⭐ MUST VISIT</div>
+        <div class="place-details">12:30 م | ⭐ 4.0/5 | 30-80 € | مطل مباشرة على البحر</div>
+        <div class="place-vibe">⭐ الفايب: بحري وترند</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-14" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🚤 جولة قارب + غوص</div>
+        <div class="place-details">3:00 م - اكتشاف الكهوف والمناطق البحرية</div>
+        <div class="place-vibe">⭐ الفايب: مغامرة</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-15" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🍽️ Celler Sa Premsa</div>
+        <div class="place-details">7:30 م - مطعم تقليدي مشهور</div>
+        <div class="place-vibe">⭐ الفايب: ثقافي وأصلي</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- اليوم 5 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم الخامس - 8 أغسطس (السبت)</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-16" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏖️ Cala s'Almunia</div>
+        <div class="place-details">9:00 ص | ⭐ 4.6/5 | مياه فيروزية صافية - الأفضل للتصوير</div>
+        <div class="place-vibe">⭐ الفايب: طبيعة وجمال</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-17" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏖️ Cala Llombards</div>
+        <div class="place-details">12:00 ظ - شاطئ بنفس الروعة | سباحة واسترخاء</div>
+        <div class="place-vibe">⭐ الفايب: هدوء وراحة</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-18" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🛍️ Centro Comercial + Café du Monde</div>
+        <div class="place-details">3:00 م - تسوق وقهوة أوروبية</div>
+        <div class="place-vibe">⭐ الفايب: حضاري وعملي</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-19" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🏖️ Caló del Moro</div>
+        <div class="place-details">5:00 م - شاطئ ساحر وهادئ</div>
+        <div class="place-vibe">⭐ الفايب: رومانسي</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-20" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🎉 Beach Club Gran Folies</div>
+        <div class="place-details">6:30 م | ⭐ 4.2/5 | بيتش كلوب فاخر مع غروب شمس</div>
+        <div class="place-vibe">⭐ الفايب: ترند وفخامة</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- اليوم 6 -->
+  <div class="section">
+    <div class="day-header">📅 اليوم السادس - 9 أغسطس (الأحد)</div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-21" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">🍽️ Restaurant Illeta ⭐ SPECIAL</div>
+        <div class="place-details">12:00 ظ | ⭐ 4.3/5 | 30-70 € | على جزيرة صغيرة | إطلالات خرافية</div>
+        <div class="place-vibe">⭐ الفايب: حصري وخاص</div>
+      </div>
+    </div>
+    
+    <div class="place-item">
+      <input type="checkbox" id="place-22" onchange="updateProgress()">
+      <div class="place-info">
+        <div class="place-name">✈️ الانتقال نحو ايبيزا</div>
+        <div class="place-details">3:20 م - مايوركا → ايبيزا (Vueling)</div>
+        <div class="place-vibe">⭐ الفايب: التحضير للحفلات</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-buttons">
+  <button class="btn btn-secondary" onclick="resetAll()">🔄 إعادة تعيين</button>
+  <button class="btn btn-primary" onclick="goToIbiza()">🎉 اذهب لايبيزا →</button>
+</div>
+
+<script>
+// ====== THEME ======
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  localStorage.setItem('palmTheme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+}
+
+// ====== PROGRESS ======
+function updateProgress() {
+  const total = 22;
+  const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+  const percentage = Math.round((checked / total) * 100);
+  
+  document.getElementById('visited').textContent = checked;
+  document.getElementById('total').textContent = total;
+  document.getElementById('percentage').textContent = percentage + '%';
+  document.getElementById('progressBar').style.width = percentage + '%';
+  
+  saveProgress();
+}
+
+// ====== STORAGE ======
+function saveProgress() {
+  const checks = {};
+  document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+    checks[i] = cb.checked;
+  });
+  localStorage.setItem('palmPlaces', JSON.stringify(checks));
+}
+
+function loadProgress() {
+  const saved = localStorage.getItem('palmPlaces');
+  if (!saved) return;
+  
+  const checks = JSON.parse(saved);
+  document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+    cb.checked = checks[i] || false;
+  });
+  updateProgress();
+}
+
+function resetAll() {
+  if (!confirm('تبي تمسح كل الخيارات؟')) return;
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+  localStorage.removeItem('palmPlaces');
+  updateProgress();
+}
+
+function goToIbiza() {
+  window.location.href = 'ibiza.html';
+}
+
+// ====== LOAD ======
+window.addEventListener('load', () => {
+  const theme = localStorage.getItem('palmTheme');
+  if (theme === 'light') {
+    document.body.classList.add('light-mode');
+  }
+  loadProgress();
+});
+
+// PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+
+</body>
+</html>
