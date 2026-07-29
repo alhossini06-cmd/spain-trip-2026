@@ -438,6 +438,8 @@
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('bookings')">🏨 الحجوزات</button>
     <button class="tab-btn" onclick="switchTab('costs')">💰 المصاريف</button>
+    <button class="tab-btn" onclick="switchTab('palma')">🌅 مايوركا</button>
+    <button class="tab-btn" onclick="switchTab('ibiza')">🎉 ايبيزا</button>
     <button class="tab-btn" onclick="switchTab('alerts')">🔔 تنبيهات</button>
   </div>
 
@@ -649,31 +651,32 @@
     </div>
   </div>
 
-  <!-- ====== TAB 5: ALERTS ====== -->
-  <div id="alerts" class="tab-panel">
+  <!-- ====== TAB 3: PALMA ====== -->
+  <div id="palma" class="tab-panel">
     <div class="section">
-      <div class="section-header">📅 الجداول اليومية</div>
+      <div class="section-header">🌅 جدول مايوركا (4-9 أغسطس)</div>
       <div class="section-body">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <a href="palma.html" style="text-decoration: none;">
-            <div style="background: linear-gradient(135deg, #FF6B35 0%, rgba(255,107,53,0.1) 100%); border: 2px solid #FF6B35; border-radius: 8px; padding: 16px; text-align: center; cursor: pointer; transition: 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
-              <div style="font-size: 32px; margin-bottom: 8px;">🌅</div>
-              <div style="font-weight: 700; color: #FF6B35; margin-bottom: 4px;">جدول مايوركا</div>
-              <div style="font-size: 12px; color: var(--text-light);">4-9 أغسطس</div>
-            </div>
-          </a>
-          
-          <a href="ibiza.html" style="text-decoration: none;">
-            <div style="background: linear-gradient(135deg, #534AB7 0%, rgba(83,74,183,0.1) 100%); border: 2px solid #534AB7; border-radius: 8px; padding: 16px; text-align: center; cursor: pointer; transition: 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
-              <div style="font-size: 32px; margin-bottom: 8px;">🎉</div>
-              <div style="font-weight: 700; color: #534AB7; margin-bottom: 4px;">جدول ايبيزا</div>
-              <div style="font-size: 12px; color: var(--text-light);">9-13 أغسطس</div>
-            </div>
-          </a>
-        </div>
+        <p style="text-align: center; font-size: 12px; color: var(--text-light); margin-bottom: 12px;">
+          ✅ اضغط على checkbox لكل مكان زرته | 📍 اضغط على الرابط لفتح الموقع في الخرائط
+        </p>
       </div>
     </div>
+  </div>
 
+  <!-- ====== TAB 4: IBIZA ====== -->
+  <div id="ibiza" class="tab-panel">
+    <div class="section">
+      <div class="section-header">🎉 جدول ايبيزا (9-13 أغسطس)</div>
+      <div class="section-body">
+        <p style="text-align: center; font-size: 12px; color: var(--text-light); margin-bottom: 12px;">
+          ✅ اضغط على checkbox لكل مكان زرته | 📍 اضغط على الرابط لفتح الموقع في الخرائط
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== TAB 5: ALERTS ====== -->
+  <div id="alerts" class="tab-panel">
     <div class="section">
       <div class="section-header">📋 قبل السفر (يجب نتأكد)</div>
       <div class="section-body">
