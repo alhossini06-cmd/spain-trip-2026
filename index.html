@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#109E75">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="رحلة إسبانيا">
+<link rel="manifest" href="manifest.json">
+<title>رحلة إسبانيا 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --primary: #109E75;
+    --bg: #1a1a1a;
+    --card-bg: #2a2a2a;
+    --text: #ffffff;
+    --text-light: #aaaaaa;
+    --border: #444;
+  }
+  
+  body.light-mode {
+    --bg: #ffffff;
+    --card-bg: #f5f5f5;
+    --text: #1a1a1a;
+    --text-light: #666666;
+    --border: #ddd;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #FF6B35 0%, #109E75 50%, #534AB7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 5px;
+  }
+  
+  .dates {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  
+  .theme-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 2rem;
+  }
+  
+  .card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    min-height: 180px;
+  }
+  
+  .card-palma {
+    border-left: 4px solid #FF6B35;
+  }
+  
+  .card-palma:hover {
+    border-color: #FF6B35;
+    transform: translateY(-5px);
+    background: rgba(255, 107, 53, 0.1);
+  }
+  
+  .card-ibiza {
+    border-left: 4px solid #534AB7;
+  }
+  
+  .card-ibiza:hover {
+    border-color: #534AB7;
+    transform: translateY(-5px);
+    background: rgba(83, 74, 183, 0.1);
+  }
+  
+  .card-emoji {
+    font-size: 48px;
+  }
+  
+  .card-name {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  
+  .card-info {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+  
+  .card-badge {
+    background: linear-gradient(135deg, #FF6B35 0%, #FFD93D 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    width: fit-content;
+    margin: 0 auto;
+  }
+  
+  .card-badge-ibiza {
+    background: linear-gradient(135deg, #534AB7 0%, #8B5EFF 100%);
+  }
+  
+  .info-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--primary);
+  }
+  
+  .info-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  
+  .info-item {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
+  
+  .info-item strong {
+    color: var(--text);
+  }
+  
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
+</head>
+<body>
+
+<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title">🌍 رحلة إسبانيا</h1>
+    <p class="subtitle">تنظيم شامل وذكي</p>
+    <p class="dates">4-13 أغسطس 2026</p>
+  </div>
+  
+  <!-- الجزائر الرئيسية -->
+  <div class="cards-container">
+    <a href="palma.html" class="card card-palma">
+      <div class="card-emoji">🌅</div>
+      <div class="card-name">مايوركا</div>
+      <div class="card-info">4-9 أغسطس</div>
+      <div class="card-badge">6 أيام</div>
+    </a>
+    
+    <a href="ibiza.html" class="card card-ibiza">
+      <div class="card-emoji">🎉</div>
+      <div class="card-name">ايبيزا</div>
+      <div class="card-info">9-13 أغسطس</div>
+      <div class="card-badge card-badge-ibiza">4 أيام</div>
+    </a>
+  </div>
+  
+  <!-- معلومات الرحلة -->
+  <div class="info-section">
+    <div class="info-title">👥 المجموعة</div>
+    <div class="info-item">معاذ، انس، مالك، محمد، عبدالملك</div>
+  </div>
+  
+  <div class="info-section">
+    <div class="info-title">💰 التكاليف (نصيب الفرد)</div>
+    <div class="info-item"><strong>12,510.97 ريال</strong> - شامل كل شيء</div>
+  </div>
+  
+  <div class="info-section">
+    <div class="info-title">✨ المميزات</div>
+    <div class="info-item">✅ اختر الأماكن اللي زرتها</div>
+    <div class="info-item">✅ متابعة التقدم تلقائية</div>
+    <div class="info-item">✅ حفظ البيانات في هاتفك</div>
+    <div class="info-item">✅ تطبيق لا يحتاج انترنت</div>
+    <div class="info-item">✅ اسهم الليل والنهار</div>
+  </div>
+  
+  <div class="footer">
+    <p>🚀 استمتع برحلتك!</p>
+    <p style="margin-top: 8px; font-size: 10px; color: var(--text-light);">
+      تم الإنشاء بـ ❤️ لرحلة لا تُنسى
+    </p>
+  </div>
+</div>
+
+<script>
+// ====== THEME ======
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  localStorage.setItem('mainTheme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+}
+
+// ====== LOAD ======
+window.addEventListener('load', () => {
+  const theme = localStorage.getItem('mainTheme');
+  if (theme === 'light') {
+    document.body.classList.add('light-mode');
+  }
+});
+
+// PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+
+</body>
+</html>
