@@ -436,101 +436,14 @@
   
   <!-- Tabs -->
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('overview')">📋 نظرة عامة</button>
-    <button class="tab-btn" onclick="switchTab('bookings')">🏨 الحجوزات</button>
+    <button class="tab-btn active" onclick="switchTab('bookings')">🏨 الحجوزات</button>
     <button class="tab-btn" onclick="switchTab('costs')">💰 المصاريف</button>
     <button class="tab-btn" onclick="switchTab('itinerary')">📅 الجدول اليومي</button>
     <button class="tab-btn" onclick="switchTab('alerts')">🔔 تنبيهات</button>
-    <button class="tab-btn" onclick="switchTab('notes')">📝 ملاحظات</button>
   </div>
 
-  <!-- ====== TAB 1: OVERVIEW ====== -->
-  <div id="overview" class="tab-panel active">
-    <div class="section">
-      <div class="section-header">🗺️ الأماكن المهمة</div>
-      <div class="section-body">
-        <div class="location-item">
-          <div class="location-name">✈️ مطار الرياض</div>
-          <div class="location-info">الإقلاع: الثلاثاء 4 أغسطس · 5:00 صباحاً</div>
-        </div>
-        
-        <div class="location-item">
-          <div class="location-name">🏨 Aubamar Palma Resort & Spa</div>
-          <div class="location-info">مايوركا | Check-in: 6:30 م | 5 ليالٍ</div>
-        </div>
-        
-        <div class="location-item">
-          <div class="location-name">🚗 استئجار السيارات</div>
-          <div class="location-info">مطار مايوركا | 6:00 عصراً</div>
-        </div>
-        
-        <div class="location-item">
-          <div class="location-name">✈️ مطار مايوركا</div>
-          <div class="location-info">الطيران لايبيزا: الأحد 9 أغسطس · 3:20 عصراً</div>
-        </div>
-        
-        <div class="location-item">
-          <div class="location-name">🎉 Ushuaïa Ibiza Beach Hotel</div>
-          <div class="location-info">ايبيزا | Check-in: 4:45 م | 4 ليالٍ | Club Access متضمن</div>
-        </div>
-        
-        <div class="location-item">
-          <div class="location-name">✈️ الرحيل</div>
-          <div class="location-info">الخميس 13 أغسطس | معاذ فقط لـ الرياض</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">💰 الملخص المالي السريع</div>
-      <div class="section-body">
-        <div class="cost-box">
-          <div class="cost-label">المبلغ الذي يدفعه كل شخص</div>
-          <div class="cost-value" id="quick-total">12,510.97 ر.س</div>
-        </div>
-        <div style="font-size: 12px; color: var(--text-light); text-align: center; line-height: 1.8;">
-          <div>✈️ الطيران: 2,351 ريال</div>
-          <div>🏨 الفنادق: 9,295.37 ريال</div>
-          <div>🚗 السيارة: 864.60 ريال</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header">📅 الأحداث المهمة</div>
-      <div class="section-body">
-        <div style="font-size: 12px; line-height: 1.8; color: var(--text);">
-          <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
-            <strong>4 أغسطس (الثلاثاء)</strong><br>
-            5:00 ص - إقلاع من الرياض<br>
-            5:10 م - وصول مايوركا<br>
-            6:30 م - Check-in الفندق
-          </div>
-          
-          <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
-            <strong>5-8 أغسطس</strong><br>
-            Nikki Beach · جولة قارب · Sa Calobra<br>
-            استمتاع في مايوركا 🏝️
-          </div>
-          
-          <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
-            <strong>9 أغسطس (الأحد)</strong><br>
-            3:20 م - طيران مايوركا → ايبيزا<br>
-            4:45 م - Check-in Ushuaïa
-          </div>
-          
-          <div>
-            <strong>10-12 أغسطس</strong><br>
-            حفلات في Ushuaïa 🎉<br>
-            Formentera (اختياري)
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ====== TAB 2: BOOKINGS ====== -->
-  <div id="bookings" class="tab-panel">
+  <!-- ====== TAB 1: BOOKINGS ====== -->
+  <div id="bookings" class="tab-panel active">
     <div class="section">
       <div class="section-header">✈️ الطيران - الرياض → مايوركا</div>
       <div class="section-body">
@@ -1143,18 +1056,36 @@
       </div>
     </div>
 
-    <div class="action-buttons">
-      <button class="btn btn-primary" onclick="resetAllChecklists()">🔄 إعادة تعيين</button>
-    </div>
-  </div>
-
-  <!-- ====== TAB 6: NOTES ====== -->
-  <div id="notes" class="tab-panel">
     <div class="section">
-      <div class="section-header">📝 ملاحظاتي</div>
+      <div class="section-header">🗺️ الأماكن المهمة والملخص</div>
       <div class="section-body">
-        <textarea class="form-textarea" id="general-notes" placeholder="اكتب أي ملاحظة مهمة..." style="height: 150px;"></textarea>
-        <button class="btn btn-primary" style="margin-top: 12px;" onclick="saveNotes()">💾 حفظ</button>
+        <div class="notes-box">
+          <strong>✈️ مطار الرياض:</strong> الإقلاع الثلاثاء 4 أغسطس · 5:00 صباحاً
+        </div>
+        <div class="notes-box">
+          <strong>🏨 Aubamar Palma Resort:</strong> مايوركا | Check-in: 6:30 م | 5 ليالٍ
+        </div>
+        <div class="notes-box">
+          <strong>✈️ مطار مايوركا:</strong> الطيران لايبيزا الأحد 9 أغسطس · 3:20 عصراً
+        </div>
+        <div class="notes-box">
+          <strong>🎉 Ushuaïa Ibiza Beach Hotel:</strong> ايبيزا | Check-in: 4:45 م | 4 ليالٍ
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">💰 ملخص المصاريف</div>
+      <div class="section-body">
+        <div style="background: var(--card-bg); padding: 12px; border-radius: 8px; text-align: center;">
+          <div style="font-size: 14px; color: var(--primary); font-weight: 700; margin-bottom: 8px;">المبلغ الذي يدفعه كل شخص</div>
+          <div style="font-size: 20px; font-weight: 700; margin-bottom: 12px;">12,510.97 ر.س</div>
+          <div style="font-size: 12px; color: var(--text-light); line-height: 1.8;">
+            <div>✈️ الطيران: 2,351 ريال</div>
+            <div>🏨 الفنادق: 9,295.37 ريال</div>
+            <div>🚗 السيارة: 864.60 ريال</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1174,11 +1105,24 @@
           <strong>📱 الهاتف:</strong> تفعيل التجوال الدولي
         </div>
         <div class="notes-box">
-          <strong>🌐 العملة:</strong> اليورو (EUR) | سعر الصرف التقريبي: 1 EUR = 4.15 ريال
+          <strong>🌐 العملة:</strong> اليورو (EUR) | سعر الصرف: 1 EUR = 4.15 ريال
         </div>
       </div>
     </div>
+
+    <div class="section">
+      <div class="section-header">📝 ملاحظاتي الشخصية</div>
+      <div class="section-body">
+        <textarea class="form-textarea" id="general-notes" placeholder="اكتب أي ملاحظة مهمة..." style="height: 120px;"></textarea>
+        <button class="btn btn-primary" style="margin-top: 12px;" onclick="saveNotes()">💾 حفظ الملاحظات</button>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-primary" onclick="resetAllChecklists()">🔄 إعادة تعيين</button>
+    </div>
   </div>
+
 
 </div>
 
@@ -1641,7 +1585,7 @@ function loadItineraryProgress() {
 // ====== LOAD ======
 window.addEventListener('load', () => {
   try {
-    const lastTab = localStorage.getItem('lastTab') || 'overview';
+    const lastTab = localStorage.getItem('lastTab') || 'bookings';
     switchTab(lastTab);
     
     const saved = localStorage.getItem('expenses');
