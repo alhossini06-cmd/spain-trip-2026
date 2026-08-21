@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#4169E1">
+<meta name="description" content="رحلة فرنسا - باريس 2025 | تنظيم شامل للمجموعة">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="فرنسا">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%234169E1' width='180' height='180' rx='40'/><text x='50%' y='50%' text-anchor='middle' dy='.3em' font-size='100' font-weight='bold' fill='white' font-family='Arial'>🇫🇷</text></svg>">
+<link rel="manifest" href="manifest.json">
+<title>رحلة فرنسا – باريس 2025</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #4169E1;
+  --secondary: #FFD700;
+  --bg: #0a0e27;
+  --card-bg: #1a1f3a;
+  --text: #ffffff;
+  --text-light: #b0b9d4;
+  --border: #2a3050;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 1.2rem 6rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 12px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4169E1, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.theme-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.theme-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+body.light-mode {
+  --bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --text-light: #666666;
+  --border: #dddddd;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+  scroll-behavior: smooth;
+}
+
+.tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tabs::-webkit-scrollbar-track {
+  background: var(--border);
+}
+
+.tabs::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.tab-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: 0.3s;
+  min-width: 80px;
+  text-align: center;
+}
+
+.tab-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(65, 105, 225, 0.3);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.section-header {
+  background: linear-gradient(135deg, var(--primary), rgba(65, 105, 225, 0.7));
+  padding: 14px 16px;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-body {
+  padding: 14px 16px;
+}
+
+.flight-card {
+  background: linear-gradient(135deg, rgba(65, 105, 225, 0.1), rgba(255, 215, 0, 0.05));
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.flight-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.flight-time {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.flight-city {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.day-header {
+  background: linear-gradient(135deg, var(--primary), rgba(65, 105, 225, 0.7));
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 13px;
+  color: white;
+}
+
+.place-item {
+  background: rgba(65, 105, 225, 0.05);
+  border-left: 3px solid var(--primary);
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.place-item:hover {
+  background: rgba(65, 105, 225, 0.1);
+  transform: translateX(4px);
+}
+
+.place-name {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.place-type {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+  display: inline-block;
+  background: rgba(65, 105, 225, 0.15);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.place-details {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 10px;
+  color: #4169E1;
+  text-decoration: none;
+  background: rgba(65, 105, 225, 0.15);
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.map-link:hover {
+  background: rgba(65, 105, 225, 0.25);
+}
+
+.group-members {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.member-card {
+  background: rgba(65, 105, 225, 0.1);
+  border: 1px solid var(--primary);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.btn:hover {
+  background: #315acc;
+  box-shadow: 0 4px 12px rgba(65, 105, 225, 0.3);
+}
+
+@media (max-width: 600px) {
+  .container { padding: 0.8rem 0.6rem 6rem; }
+  .title { font-size: 20px; }
+  .tab-btn { min-width: 65px; font-size: 9px; padding: 7px 5px; }
+  .section-header { padding: 10px 12px; font-size: 13px; }
+  .section-body { padding: 10px 12px; }
+  .place-item { padding: 10px; }
+  .flight-time { font-size: 18px; }
+  .place-name { font-size: 12px; }
+}
+
+@media (max-width: 380px) {
+  .title { font-size: 18px; }
+  .tab-btn { min-width: 55px; font-size: 8px; padding: 6px 4px; }
+  .place-name { font-size: 11px; }
+  .place-details { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title">🇫🇷 باريس 2025</h1>
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('overview')">📋 نظرة عامة</button>
+    <button class="tab-btn" onclick="switchTab('flights')">✈️ الرحلات</button>
+    <button class="tab-btn" onclick="switchTab('schedule')">📅 الجدول اليومي</button>
+    <button class="tab-btn" onclick="switchTab('restaurants')">🍽️ المطاعم</button>
+    <button class="tab-btn" onclick="switchTab('cafes')">☕ الكافيهات</button>
+  </div>
+
+  <!-- TAB 1: OVERVIEW -->
+  <div id="overview" class="tab-panel active">
+    <div class="section">
+      <div class="section-header">👥 المجموعة</div>
+      <div class="section-body">
+        <div class="group-members">
+          <div class="member-card">معاذ</div>
+          <div class="member-card">عمار</div>
+          <div class="member-card">غالية</div>
+          <div class="member-card">هيلة</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">📅 تاريخ الرحلة</div>
+      <div class="section-body">
+        <div style="font-size: 12px; line-height: 1.8;">
+          <div style="margin-bottom: 12px;">
+            <div style="color: var(--primary); font-weight: 700; margin-bottom: 4px;">🚀 الذهاب</div>
+            <div>13 نوفمبر 2025</div>
+            <div style="color: var(--text-light);">الرياض 07:00 ص → باريس 02:05 م</div>
+          </div>
+          <div style="padding-top: 12px; border-top: 1px solid var(--border);">
+            <div style="color: var(--primary); font-weight: 700; margin-bottom: 4px;">🔙 العودة</div>
+            <div>19 نوفمبر 2025</div>
+            <div style="color: var(--text-light);">باريس 10:50 ص → الرياض 19:00 م</div>
+          </div>
+          <div style="padding-top: 12px; border-top: 1px solid var(--border); color: var(--primary); font-weight: 700;">
+            ⏱️ المدة: 6 أيام كاملة
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">🗺️ الموقع</div>
+      <div class="section-body">
+        <div style="font-size: 12px; text-align: center; color: var(--primary); font-weight: 700;">
+          ✨ باريس - عاصمة الحب والفن
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: FLIGHTS -->
+  <div id="flights" class="tab-panel">
+    <div class="section">
+      <div class="section-header">✈️ تفاصيل الرحلات</div>
+      <div class="section-body">
+        <div class="flight-card">
+          <div class="flight-info">
+            <div>
+              <div class="flight-time">07:00</div>
+              <div class="flight-city">CDG - الرياض</div>
+            </div>
+            <div style="text-align: center; color: var(--text-light); font-size: 12px;">رحلة مباشرة<br>7 ساعات</div>
+            <div style="text-align: right;">
+              <div class="flight-time">02:05</div>
+              <div class="flight-city">RUH - باريس</div>
+            </div>
+          </div>
+          <div style="font-size: 11px; color: var(--text-light); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border);">
+            📅 الخميس 13 نوفمبر 2025 | ✈️ Qatar Airways | 🎫 SV 143
+          </div>
+        </div>
+
+        <div class="flight-card" style="margin-top: 14px;">
+          <div class="flight-info">
+            <div>
+              <div class="flight-time">10:50</div>
+              <div class="flight-city">CDG - باريس</div>
+            </div>
+            <div style="text-align: center; color: var(--text-light); font-size: 12px;">رحلة مباشرة<br>8 ساعات</div>
+            <div style="text-align: right;">
+              <div class="flight-time">19:00</div>
+              <div class="flight-city">RUH - الرياض</div>
+            </div>
+          </div>
+          <div style="font-size: 11px; color: var(--text-light); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border);">
+            📅 الأربعاء 19 نوفمبر 2025 | ✈️ Qatar Airways | 🎫 SV 144
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: SCHEDULE -->
+  <div id="schedule" class="tab-panel">
+    <div class="section">
+      <div class="section-header">📅 الجدول اليومي</div>
+      <div class="section-body">
+        
+        <!-- Day 1 -->
+        <div class="day-header">اليوم 1️⃣ - الخميس 13 نوفمبر | الوصول</div>
+        <div class="place-item">
+          <div class="place-name">✈️ الإقلاع من الرياض</div>
+          <div class="place-type">رحلة</div>
+          <div class="place-details">07:00 صباحاً - Qatar Airways</div>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🏨 الوصول لباريس</div>
+          <div class="place-type">وصول</div>
+          <div class="place-details">02:05 ظهراً - مطار شارل ديجول</div>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🏩 الفندق</div>
+          <div class="place-type">إقامة</div>
+          <div class="place-details">Check-in والراحة</div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="day-header">اليوم 2️⃣ - الجمعة 14 نوفمبر | استكشاف الشارع</div>
+        <div class="place-item">
+          <div class="place-name">☕ Starbucks Opera</div>
+          <div class="place-type">كافيه صباحي</div>
+          <div class="place-details">قهوة واستيقاظ | أفضل ستاربكس في باريس</div>
+          <a href="https://maps.google.com/?q=Starbucks+Opera+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🏛️ متحف اللوفر</div>
+          <div class="place-type">متحف</div>
+          <div class="place-details">زيارة أشهر متحف بالعالم</div>
+          <a href="https://maps.google.com/?q=Louvre+Museum+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🍽️ Café de Flore</div>
+          <div class="place-type">مطعم كلاسيكي</div>
+          <div class="place-details">أشهر كافيه بباريس منذ 1887</div>
+          <a href="https://maps.google.com/?q=Cafe+de+Flore+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="day-header">اليوم 3️⃣ - السبت 15 نوفمبر | المعالم الشهيرة</div>
+        <div class="place-item">
+          <div class="place-name">☕ Joe & The Juice</div>
+          <div class="place-type">كافيه ترندي</div>
+          <div class="place-details">عصائر صحية وقهوة احترافية</div>
+          <a href="https://maps.google.com/?q=Joe+and+The+Juice+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🗼 برج إيفل</div>
+          <div class="place-type">معلم سياحي</div>
+          <div class="place-details">الصعود لأعلى برج إيفل</div>
+          <a href="https://maps.google.com/?q=Eiffel+Tower+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🎨 Sacré-Cœur</div>
+          <div class="place-type">كنيسة تاريخية</div>
+          <div class="place-details">إطلالة خلابة على المدينة</div>
+          <a href="https://maps.google.com/?q=Sacre+Coeur+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🍽️ Pink Mamma</div>
+          <div class="place-type">مطعم إيطالي فاخر</div>
+          <div class="place-details">أفضل مطعم إيطالي بباريس ⭐</div>
+          <a href="https://maps.google.com/?q=Pink+Mamma+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="day-header">اليوم 4️⃣ - الأحد 16 نوفمبر | شارع التسوق</div>
+        <div class="place-item">
+          <div class="place-name">☕ Le Deux Magots</div>
+          <div class="place-type">كافيه أسطوري</div>
+          <div class="place-details">أشهر كافيه بالضفة اليسرى</div>
+          <a href="https://maps.google.com/?q=Le+Deux+Magots+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🛍️ Galeries Lafayette</div>
+          <div class="place-type">مول فاخر</div>
+          <div class="place-details">تسوق الماركات العالمية</div>
+          <a href="https://maps.google.com/?q=Galeries+Lafayette+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">☕ Carette</div>
+          <div class="place-type">كافيه فاخر</div>
+          <div class="place-details">حلويات وقهوة من أفضل ما يكون</div>
+          <a href="https://maps.google.com/?q=Carette+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🍽️ Le Relais de l'Entrecôte</div>
+          <div class="place-type">مطعم فرنسي</div>
+          <div class="place-details">تخصص بلحم الستيك الفرنسي الأصلي</div>
+          <a href="https://maps.google.com/?q=Le+Relais+de+Entrecote+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <!-- Day 5 -->
+        <div class="day-header">اليوم 5️⃣ - الاثنين 17 نوفمبر | باريس الفنية</div>
+        <div class="place-item">
+          <div class="place-name">☕ Divino Café</div>
+          <div class="place-type">كافيه مخصص</div>
+          <div class="place-details">نبيذ وقهوة فرنسي احترافي</div>
+          <a href="https://maps.google.com/?q=Divino+Cafe+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🎨 Arc de Triomphe</div>
+          <div class="place-type">معلم تاريخي</div>
+          <div class="place-details">قوس النصر الشهير</div>
+          <a href="https://maps.google.com/?q=Arc+de+Triomphe+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🛍️ Merci Paris</div>
+          <div class="place-type">متجر فنطاستيكي</div>
+          <div class="place-details">متجر ديكور وملابس ترندي</div>
+          <a href="https://maps.google.com/?q=Merci+Paris+Store" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🍽️ Laduree</div>
+          <div class="place-type">حلويات فرنسية</div>
+          <div class="place-details">أشهر متجر ماكرون بالعالم ⭐</div>
+          <a href="https://maps.google.com/?q=Laduree+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <!-- Day 6 -->
+        <div class="day-header">اليوم 6️⃣ - الثلاثاء 18 نوفمبر | آخر يوم</div>
+        <div class="place-item">
+          <div class="place-name">☕ Café Lucy</div>
+          <div class="place-type">كافيه محبب</div>
+          <div class="place-details">قهوة ممتازة مع أجواء رومانسية</div>
+          <a href="https://maps.google.com/?q=Cafe+Lucy+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🏺 متحف الفن الحديث</div>
+          <div class="place-type">متحف</div>
+          <div class="place-details">فن معاصر وحديث</div>
+          <a href="https://maps.google.com/?q=Musee+Art+Moderne+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🍽️ Chez Rémy</div>
+          <div class="place-type">مطعم فرنسي كلاسيكي</div>
+          <div class="place-details">طعام فرنسي أصلي بأسعار معقولة</div>
+          <a href="https://maps.google.com/?q=Chez+Remy+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+        <div class="place-item">
+          <div class="place-name">🌙 جولة ليلية</div>
+          <div class="place-type">نزهة</div>
+          <div class="place-details">استمتع بآخر ليلة في باريس</div>
+        </div>
+
+        <!-- Day 7 -->
+        <div class="day-header">اليوم 7️⃣ - الأربعاء 19 نوفمبر | العودة</div>
+        <div class="place-item">
+          <div class="place-name">✈️ المغادرة</div>
+          <div class="place-type">رحيل</div>
+          <div class="place-details">10:50 ص - مطار شارل ديجول</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: RESTAURANTS -->
+  <div id="restaurants" class="tab-panel">
+    <div class="section">
+      <div class="section-header">🍽️ أفضل المطاعم</div>
+      <div class="section-body">
+        
+        <div class="place-item">
+          <div class="place-name">⭐ Pink Mamma</div>
+          <div class="place-type">إيطالي فاخر</div>
+          <div class="place-details">🎖️ أفضل مطعم إيطالي بباريس | نجمة ميشلان | أسعار: €€€ | الحجز موصى به</div>
+          <a href="https://maps.google.com/?q=Pink+Mamma+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">⭐ Le Relais de l'Entrecôte</div>
+          <div class="place-type">فرنسي كلاسيكي</div>
+          <div class="place-details">🥩 تخصص بلحم الستيك | أسعار: €€ | بدون حجز (أول جاهز)</div>
+          <a href="https://maps.google.com/?q=Le+Relais+de+Entrecote+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">⭐ Chez Rémy</div>
+          <div class="place-type">فرنسي تقليدي</div>
+          <div class="place-details">🇫🇷 طعام فرنسي أصلي | أسعار معقولة: €€ | أجواء دافئة</div>
+          <a href="https://maps.google.com/?q=Chez+Remy+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">Le Comptoir du Panthéon</div>
+          <div class="place-type">بسترو فرنسي</div>
+          <div class="place-details">قريب من متحف اللوفر | أسعار: €€ | أجواء كلاسيكية</div>
+          <a href="https://maps.google.com/?q=Le+Comptoir+du+Pantheon+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">Maison d'Isabelle</div>
+          <div class="place-type">بيتزيريا إيطالية</div>
+          <div class="place-details">بيتزا وباستا طازة | أسعار: €€</div>
+          <a href="https://maps.google.com/?q=Maison+Isabelle+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">RITZ Paris - Le Vendôme</div>
+          <div class="place-type">فرنسي فاخر جداً</div>
+          <div class="place-details">🏰 فندق RITZ الشهير | نجمتا ميشلان | أسعار: €€€€</div>
+          <a href="https://maps.google.com/?q=RITZ+Paris+Restaurant" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">L'Atelier de Joël Robuchon</div>
+          <div class="place-type">فرنسي شهير</div>
+          <div class="place-details">🌟 نجمة ميشلان | أسعار: €€€ | حجز ضروري</div>
+          <a href="https://maps.google.com/?q=Atelier+Joel+Robuchon+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 5: CAFES -->
+  <div id="cafes" class="tab-panel">
+    <div class="section">
+      <div class="section-header">☕ أفضل الكافيهات</div>
+      <div class="section-body">
+
+        <div class="place-item">
+          <div class="place-name">⭐ Café de Flore</div>
+          <div class="place-type">كافيه أسطوري</div>
+          <div class="place-details">🎨 كافيه كلاسيكي منذ 1887 | زاره الفنانين الشهيرين | أسعار: €€€</div>
+          <a href="https://maps.google.com/?q=Cafe+de+Flore+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">⭐ Le Deux Magots</div>
+          <div class="place-type">كافيه بوهيمي</div>
+          <div class="place-details">🌟 الكافيه الأسطوري الآخر بجانب Flore | أسعار: €€€ | أجواء فنية</div>
+          <a href="https://maps.google.com/?q=Le+Deux+Magots+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">⭐ Starbucks Opera</div>
+          <div class="place-type">كافيه حديث</div>
+          <div class="place-details">☕ أجمل ستاربكس بالعالم | إطلالة على دار الأوبرا | أسعار: €€</div>
+          <a href="https://maps.google.com/?q=Starbucks+Opera+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">⭐ Carette</div>
+          <div class="place-type">كافيه فاخر + حلويات</div>
+          <div class="place-details">🍰 أفضل حلويات وبسترى | أسعار: €€€ | أجواء فخمة</div>
+          <a href="https://maps.google.com/?q=Carette+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">⭐ Joe & The Juice</div>
+          <div class="place-type">كافيه صحي ترندي</div>
+          <div class="place-details">🥤 عصائر طازة | قهوة احترافية | أسعار: €€</div>
+          <a href="https://maps.google.com/?q=Joe+and+The+Juice+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">Café Lucy</div>
+          <div class="place-type">كافيه كوزي</div>
+          <div class="place-details">☕ قهوة ممتازة | أجواء رومانسية | أسعار: €€</div>
+          <a href="https://maps.google.com/?q=Cafe+Lucy+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">Divino Café</div>
+          <div class="place-type">كافيه + نبيذ</div>
+          <div class="place-details">🍷 نبيذ فرنسي | قهوة فاخرة | أسعار: €€€</div>
+          <a href="https://maps.google.com/?q=Divino+Cafe+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">Laduree</div>
+          <div class="place-type">ماكرون + كافيه</div>
+          <div class="place-details">🎨 أشهر متجر ماكرون بالعالم | كافيه فاخر | أسعار: €€€</div>
+          <a href="https://maps.google.com/?q=Laduree+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">Paris Coffeeshop</div>
+          <div class="place-type">كافيه معاصر</div>
+          <div class="place-details">☕ قهوة حرفية | أجواء هادئة | أسعار: €€</div>
+          <a href="https://maps.google.com/?q=Paris+Coffeeshop" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+        <div class="place-item">
+          <div class="place-name">KITH Coffee</div>
+          <div class="place-type">كافيه ترندي</div>
+          <div class="place-details">🌟 علامة تجارية عالمية | ترندي جداً | أسعار: €€</div>
+          <a href="https://maps.google.com/?q=KITH+Coffee+Paris" target="_blank" class="map-link">📍 فتح الخريطة</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Theme Toggle
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+}
+
+// Load theme preference
+if (localStorage.getItem('theme') === 'light') {
+  document.body.classList.add('light-mode');
+}
+
+// Tab Switching
+function switchTab(tabName) {
+  const panels = document.querySelectorAll('.tab-panel');
+  const buttons = document.querySelectorAll('.tab-btn');
+  
+  panels.forEach(panel => panel.classList.remove('active'));
+  buttons.forEach(button => button.classList.remove('active'));
+  
+  document.getElementById(tabName).classList.add('active');
+  event.target.classList.add('active');
+  
+  localStorage.setItem('lastTab', tabName);
+}
+
+// Load last tab
+const lastTab = localStorage.getItem('lastTab') || 'overview';
+document.getElementById(lastTab).classList.add('active');
+document.querySelector(`[onclick="switchTab('${lastTab}')"]`).classList.add('active');
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').then(reg => {
+      console.log('Service Worker registered');
+    }).catch(err => console.log('SW registration failed'));
+  });
+}
+</script>
+
+</body>
+</html>
