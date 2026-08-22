@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#D4AF37">
+<meta name="description" content="تجارب باريس - جولات وحلقات ورحلات فريدة | 2026">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="تجارب باريس">
+<link rel="manifest" href="manifest.json">
+<title>تجارب باريس – جولات وحلقات وسفاري</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #D4AF37;
+  --secondary: #1a1a1a;
+  --bg: #0f0f0f;
+  --card-bg: #1a1a1a;
+  --text: #f0f0f0;
+  --text-light: #b8b8b8;
+  --border: #2d2d2d;
+  --accent: #c9a961;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '🇫🇷 🎡 ✈️ 🚗 🌊 💫';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 180px;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
+  word-wrap: break-word;
+  line-height: 1.2;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 1.2rem 4rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 12px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #D4AF37, #f4e4c1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.theme-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.theme-btn:hover {
+  background: #D4AF37;
+  border-color: #D4AF37;
+}
+
+body.light-mode {
+  --bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --text-light: #666666;
+  --border: #dddddd;
+}
+
+.banner {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(212, 175, 55, 0.08);
+  border-radius: 12px;
+  border: 1px solid #D4AF37;
+}
+
+.banner-emoji {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.banner-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #D4AF37;
+  margin-bottom: 4px;
+}
+
+.banner-desc {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.section-header {
+  background: linear-gradient(135deg, #D4AF37, #a68c3a);
+  padding: 14px 16px;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f0f0f;
+}
+
+.section-body {
+  padding: 14px 16px;
+}
+
+.experience-card {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+  border: 1px solid #D4AF37;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: 0.3s;
+}
+
+.experience-card:hover {
+  background: rgba(212, 175, 55, 0.15);
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
+}
+
+.exp-number {
+  display: inline-block;
+  background: #D4AF37;
+  color: #0f0f0f;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.exp-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #D4AF37;
+}
+
+.exp-type {
+  display: inline-block;
+  background: rgba(212, 175, 55, 0.2);
+  color: #D4AF37;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.exp-details {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+
+.exp-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #D4AF37, #a68c3a);
+  color: #0f0f0f;
+  padding: 10px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  transition: 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.exp-button:hover {
+  background: linear-gradient(135deg, #e5c158, #c9a961);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.info-box {
+  background: rgba(212, 175, 55, 0.08);
+  border-left: 3px solid #D4AF37;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.info-box strong {
+  color: #D4AF37;
+}
+
+@media (max-width: 600px) {
+  .container { padding: 0.8rem 0.6rem 4rem; }
+  .title { font-size: 20px; }
+  .exp-title { font-size: 13px; }
+  .exp-details { font-size: 11px; }
+}
+
+@media (max-width: 380px) {
+  .title { font-size: 18px; }
+  .exp-title { font-size: 12px; }
+  .exp-details { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font-size: 24px;">🇫🇷</span>
+      <h1 class="title">تجارب باريس</h1>
+      <span style="font-size: 24px;">✨</span>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+  </div>
+
+  <div class="banner">
+    <div class="banner-emoji">🎡 ✈️ 🚗 🌊</div>
+    <div class="banner-title">تجارب فريدة وذكريات لا تُنسى</div>
+    <div class="banner-desc">رحلات وجولات وحلقات مميزة في باريس</div>
+  </div>
+
+  <div style="text-align: center; margin-bottom: 16px; font-size: 32px; opacity: 0.7;">
+    🇫🇷 ✨ 🎯 ✨ 🇫🇷
+  </div>
+
+  <!-- التجارب -->
+  <div class="section">
+    <div class="section-header">✨ التجارب والرحلات المميزة</div>
+    <div class="section-body">
+
+      <!-- التجربة 1 -->
+      <div class="experience-card">
+        <div class="exp-number">1️⃣</div>
+        <div class="exp-title">🚗 جولة في باريس بسيارة كلاسيكية</div>
+        <div class="exp-type">جولة سياحية بسيارة عتيقة</div>
+        <div class="exp-details">
+          <strong>تجربة فريدة من نوعها!</strong><br>
+          ركوب سيارة كلاسيكية من عهد الستينيات واستكشاف باريس بأسلوب عتيق وأنيق. مشاهدة المعالم السياحية الشهيرة من نافذة السيارة الجميلة. تصوير صور تاريخية وفريدة. دليل متخصص يحكي تاريخ باريس والمعالم. جولة رومانسية وراقية جداً.
+        </div>
+        <div class="info-box">
+          ⏱️ <strong>المدة:</strong> 2-3 ساعات | 👥 <strong>العدد:</strong> حتى 4 أشخاص | 💰 <strong>السعر:</strong> من 150 يورو
+        </div>
+        <a href="https://ar.airbnb.com/experiences/4461804?checkin=2026-11-14&location=%D8%A8%D8%A7%D8%B1%D9%8A%D8%B3%2C%20%D9%81%D8%B1%D9%86%D8%B3%D8%A7&currentTab=experience_tab" target="_blank" class="exp-button">👉 اذهب للحجز</a>
+      </div>
+
+      <!-- التجربة 2 -->
+      <div class="experience-card">
+        <div class="exp-number">2️⃣</div>
+        <div class="exp-title">🌊 رحلة بحر على نهر السين من برج إيفل</div>
+        <div class="exp-type">جولة نهر هادئة ورومانسية</div>
+        <div class="exp-details">
+          <strong>تجربة سحرية على الماء!</strong><br>
+          رحلة بحرية راقية على نهر السين تبدأ من برج إيفل. مشاهدة جميع المعالم من على الماء (كاتدرائية نوتردام، اللوفر، متحف د'أورسيه). غروب الشمس على الماء روعة. تصوير صور خيالية. أجواء رومانسية وهادئة جداً.
+        </div>
+        <div class="info-box">
+          ⏱️ <strong>المدة:</strong> 1-1.5 ساعة | 👥 <strong>العدد:</strong> مجموعات صغيرة | 💰 <strong>السعر:</strong> من 25 يورو
+        </div>
+        <a href="https://ar.airbnb.com/experiences/6785604?checkin=2026-11-14&location=%D8%A8%D8%A7%D8%B1%D9%8A%D8%B3%2C%20%D9%81%D8%B1%D9%86%D8%B3%D8%A7&currentTab=experience_tab" target="_blank" class="exp-button">👉 اذهب للحجز</a>
+      </div>
+
+      <!-- التجربة 3 -->
+      <div class="experience-card">
+        <div class="exp-number">3️⃣</div>
+        <div class="exp-title">✈️ حلق فوق باريس مع طيار محلي</div>
+        <div class="exp-type">تجربة حلق لا تُنسى</div>
+        <div class="exp-details">
+          <strong>منظر من السماء!</strong><br>
+          حلق فوق باريس من داخل طائرة صغيرة مع طيار محترف محلي. رؤية برج إيفل والسين ومعالم باريس من السماء. تصوير جوي احترافي. مشاهدة غروب الشمس من الجو. أفضل طريقة لرؤية باريس بكاملها. تجربة جريئة ورومانسية جداً.
+        </div>
+        <div class="info-box">
+          ⏱️ <strong>المدة:</strong> 45 دقيقة إلى ساعة | 👥 <strong>العدد:</strong> 1-3 أشخاص | 💰 <strong>السعر:</strong> من 220 يورو
+        </div>
+        <a href="https://ar.airbnb.com/experiences/search?tab=experience_tab&refinement_paths=%5B%2Fhomes%5D&flexible_trip_dates%5B%5D=month&flexible_trip_lengths%5B%5D=weekend&date_picker_type=flexible_dates&checkin=2026-11-14&location=باريس%2C%20فرنسا&search_type=user_map_move" target="_blank" class="exp-button">👉 ابحث عن المزيد</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- نصائح -->
+  <div class="section">
+    <div class="section-header">💡 نصائح مهمة</div>
+    <div class="section-body" style="font-size: 12px; line-height: 1.8;">
+      ✅ <strong>احجز مسبقاً:</strong> التجارب الشهيرة تمتلئ بسرعة، احجز قبل الرحلة بأسابيع<br><br>
+      ✅ <strong>أفضل الأوقات:</strong> الغروب والأمسيات أفضل من النهار<br><br>
+      ✅ <strong>الملابس:</strong> البس ملابس مريحة وفاخرة للجولات<br><br>
+      ✅ <strong>الكاميرا:</strong> أحضر كاميرا جيدة لتصوير صور لا تُنسى<br><br>
+      ✅ <strong>المجموعة:</strong> كل التجارب متوفرة لمجموعات صغيرة مثل مجموعتكم
+    </div>
+  </div>
+
+  <!-- مواعيد الرحلة -->
+  <div class="section">
+    <div class="section-header">📅 المواعيد المقترحة</div>
+    <div class="section-body" style="font-size: 12px; line-height: 1.8;">
+      📍 <strong>اليوم 2 (الجمعة 14 نوفمبر):</strong> رحلة نهر السين 🌊<br><br>
+      📍 <strong>اليوم 3 (السبت 15 نوفمبر):</strong> جولة السيارة الكلاسيكية 🚗 أو الحلق ✈️<br><br>
+      📍 <strong>اليوم 5 (الاثنين 17 نوفمبر):</strong> الحلق فوق باريس ✈️
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+}
+
+if (localStorage.getItem('theme') === 'light') {
+  document.body.classList.add('light-mode');
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed'));
+  });
+}
+</script>
+
+</body>
+</html>
