@@ -1191,8 +1191,16 @@ function switchTab(tabName) {
 
 // Load last tab
 const lastTab = localStorage.getItem('lastTab') || 'overview';
-document.getElementById(lastTab).classList.add('active');
-document.querySelector(`[onclick="switchTab('${lastTab}')"]`).classList.add('active');
+const tabPanel = document.getElementById(lastTab);
+if (tabPanel) {
+  tabPanel.classList.add('active');
+}
+const allBtns = document.querySelectorAll('.tab-btn');
+allBtns.forEach(btn => {
+  if (btn.getAttribute('onclick').includes(lastTab)) {
+    btn.classList.add('active');
+  }
+});
 
 // Service Worker Registration
 if ('serviceWorker' in navigator) {
