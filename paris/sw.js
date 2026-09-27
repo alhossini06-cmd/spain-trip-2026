@@ -1,4 +1,4 @@
-const CACHE = 'paris-trip-2026-v2';
+const CACHE = 'paris-trip-2026-v3';
 const CORE = ['./paris_2026.html', './manifest.json'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).catch(() => {}));
